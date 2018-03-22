@@ -1,0 +1,11 @@
+.recharge_num{ height: 3em; background: #fff;  padding:0 1em; }
+.recharge_num input{ height: 2.5em; margin-left: 0.6em; border: 0 none;}
+.recharge_black{ margin-top: 2em; margin-bottom: 1em; margin-left: 1em;}
+.recharge_btn{ background: #a4046b; height: 2.8em; margin: 0 1em; color: #fff; border-radius: 0.4em;}
+.nav_left{ border-top-left-radius: 0.4em; border-bottom-left-radius: 0.4em;}
+.nav_right{ border-top-right-radius: 0.4em; border-bottom-right-radius: 0.4em;}
+.rech_record{ background: #fff; }
+.margin6{ margin-bottom: 0.6em;}
+.record_left img{ width: 1.2em;}
+.record_item{ border-bottom: 1px solid #E1E1E1; padding: 0.6em 1em;}
+.changebox{ padding-top: 0.6em;}

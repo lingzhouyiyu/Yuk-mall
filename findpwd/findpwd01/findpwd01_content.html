@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver bc-text main_box">
+
+			<div class="ub  ub-ac ub-f1 input_item">
+
+				<div class="ub ub-f1 pwd_input uinput">
+					<input class="ub ub-f1  oldpasd" type="password" placeholder="请输入新密码" />
+				</div>
+			</div>
+			<div class="ub  ub-ac ub-f1 input_item uinput">
+				<input class="ub ub-f1 newFpwd" type="password" placeholder="重复密码" />
+			</div>
+		</div>
+		<div class="ub btn_box">
+			<div class="ub ub-ac ub-pc ub-f1 go_btn">
+				确认
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../common/js/jquery-2.1.4.min.js"></script>
+	<script src="../../common/js/appcan.js"></script>
+	<script src="../../common/js/appcan.control.js"></script>
+	<script src="../../common/js/appcan.tab.js"></script>
+	<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+	<script type="text/javascript" src="../../common/js/jquery.md5.js"></script>
+	<script type="text/javascript" src="../../common/js/Safe.js"></script>
+	<script type="text/javascript" src="../../common/js/des.js"></script>
+	<script>
+		//确认按钮
+		appcan.button(".go_btn", "ani-act", function(a, b) {
+			checkPassword();
+		})
+
+		function checkPassword() {
+			var oldpasd = $(".oldpasd").val();
+			var newFpwd = $(".newFpwd").val();
+			if(oldpasd == "") {
+				appcan.window.openToast('旧不能为空！', '1500');
+				return;
+			}
+			if(newFpwd == "") {
+				appcan.window.openToast('新密码不能为空！', '1500');
+				return;
+			}
+			if(oldpasd != newFpwd) {
+				appcan.window.openToast('两次密码不一样！', '1500');
+				return;
+			}
+			var parm = {
+				currentFpwd: $.md5($(".oldpasd").val()).toUpperCase(),
+				newFpwd: $.md5($(".newFpwd").val()).toUpperCase(),
+				Fphone: appcan.locStorage.getVal("changephone")
+			}
+			Safe.apppost("http://dzyryd2.shop0301.com" + "/app/resetPawd", parm, function(result) {
+				var code = result.code;
+				if(code == 0) {
+					appcan.window.open("login", "../../login/login.html");
+					appcan.window.evaluateScript({
+						name: 'findpwd01',
+						scriptContent: 'windowclose()'
+					});
+					appcan.window.evaluateScript({
+						name: 'findpwd',
+						scriptContent: 'windowclose()'
+					});
+				} else {
+					return;
+				}
+			})
+		}
+	</script>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="mylist">
+
+		</div>
+		<div id="mytemp" style="display: none;">
+			<div id="myitem">
+
+				<div class="ub ub-ver address">
+					<div class="ub ub-ac bc-text xz dj">
+						<div class="ub ub-ac name Fname">小张师</div>
+						<div class="ub ub-ac Fphone">135****3990</div>
+					</div>
+					<div class="ub ub-ac dz Ftotaladdress">云南省昆明市五华区高新区戛纳小镇c座1311室</div>
+					<div class="ub ub-ac ub-pj choose">
+						<div class="ub ub-ac dj mrdz">
+							<div class="ub ub-ac">
+								<div class="ub ub-ac dbcheck ">
+									<div class="ub allcheck check_radio"></div>
+									<img class="check_ok uhide ub-img " class="ub ub-img" src="../common/images/ok.png" />
+								</div>
+							</div>
+							<div class="ub ub-ac hs " id="">默认地址</div>
+						</div>
+						<div class="ub ub-ac">
+							<div class="ub ub-ac hs"><img class="ub ub-img" src="../address/css/myImg//1.png" />
+								<div class="bianji" id="">编辑</div>
+							</div>
+							<div class="ub ub-ac hs"><img class="ub ub-img" src="../address/css/myImg//2.png" />
+								<div class="shanchu" id="">删除</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="border"></div>
+
+			</div>
+		</div>
+
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	</body>
+	<script>
+		
+
+
+		appcan.ready(function() {
+				getaddress();
+			})
+			//请求地址数据
+		function getaddress() {
+			appcan.ajax({
+				url: Serverurl + "/YgylApp/getaddress",
+				type: "POST",
+				dataType: "json",
+				data: {
+					Fuserid: Fsuper.getuserid(),
+				},
+				success: function(result) {
+
+					var rows = result.data.rows;
+					var code = result.code;
+					var msg = result.msg;
+					var end = result.data.end;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							var length = result.data.length;
+							for(var i = 0; i < length; i++) {
+								additem(result.data[i]);
+							}
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
+				}
+			});
+		}
+
+		function additem(data) //加载地址列表
+		{
+			var list = $(".mylist");
+
+			var clonedom = $("#mytemp").clone();
+			var itemdom = clonedom.find("#myitem");
+
+			var Fprovince = data.Fprovince;
+			var Fcity = data.Fcity;
+			var Fregion = data.Fregion;
+			var Ftotaladdress = Fprovince + Fcity + Fregion;
+
+			itemdom.find(".Fphone").text(data.Fphone);
+			itemdom.find(".Fname").text(data.Fname);
+			itemdom.find(".Ftotaladdress").text(Ftotaladdress);
+			itemdom.find(".mrdz").attr("id", data.Fid);
+			itemdom.find(".bianji").attr("id", data.Fid);
+			itemdom.find(".shanchu").attr("id", data.Fid);
+			itemdom.find(".mrdz").attr("onclick", "defaltddress('" + data.Fid + "',this)");
+			itemdom.find(".bianji").attr("onclick", "editddress('" + data.Fid + "')");
+			itemdom.find(".shanchu").attr("onclick", "deleteddress('" + data.Fid + "')");
+
+			if(data.defaultTag==1){			     
+			   itemdom.find(".check_ok").removeClass("uhide");
+               itemdom.find(".check_radio").addClass("uhide");		    
+			}else if(data.defaultTag==0){
+			   itemdom.find(".check_ok").addClass("uhide");
+               itemdom.find(".check_radio").removeClass("uhide");		    
+			}
+			list.append(itemdom);
+		}
+		//设置默认地址
+		function defaltddress(Fid,dom) {
+		    $(".check_ok").addClass("uhide");
+            $(".check_radio").removeClass("uhide");
+            $(dom).find(".check_ok").removeClass("uhide");
+            $(dom).find(".check_radio").addClass("uhide");
+            console.log($(dom));
+			appcan.ajax({
+				url: Serverurl + "/YgylApp/setdefault",
+				type: "POST",
+				dataType: "json",
+				data: {
+					Fid: Fid,
+				},
+				success: function(result) {
+
+					var code = result.code;
+					var msg = result.msg;
+
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
+				}
+			});
+
+		}
+		//编辑地址
+		function editddress(Fid) {
+			appcan.locStorage.setVal("editid", Fid);
+			appcan.locStorage.setVal("savetag", 1);
+			appcan.window.open("addAddress", "../addAddress/addAddress_content.html");
+
+		}
+		//删除地址
+		function deleteddress(Fid) {
+			appcan.window.alert({
+				title: "提示",
+				content: "是否确定收货？",
+				buttons: ['取消', '确定'],
+				callback: function(err, data, dataType, optId) {
+					if(data == 1) {
+						appcan.ajax({
+							url: Serverurl + "/YgylApp/deleteddress",
+							type: "POST",
+							dataType: "json",
+							data: {
+								Fid: Fid,
+							},
+							success: function(result) {
+
+								var code = result.code;
+								var msg = result.msg;
+
+								var debug = result.debug;
+								if(code < 10000) {
+									if(code == 0) { //返回成功
+										appcan.window.open("address", "../address/address.html");
+									}
+								} else {
+									if(Fsuperdbg) {
+										alert(result.code);
+										alert(result.msg);
+										alert(result.debug);
+									}
+								}
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown) {
+								alert(XMLHttpRequest.status);
+								alert(XMLHttpRequest.readyState);
+								alert(textStatus);
+							}
+						});
+					}
+				}
+			});
+
+		}
+	</script>
+
+</html>

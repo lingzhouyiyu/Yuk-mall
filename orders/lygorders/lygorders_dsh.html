@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<!--待付款订单列表-->
+		<div class="ub bc-text ub-ver dfk_list list">
+			<!--待付款一个大订单item-->
+
+		</div>
+		<div class="temp uhide">
+			<div class="ub ub-ver shenhe_item items">
+				<div class="ub ub-ver ub-f1">
+					<div class="ub dfk_top dfk_top02">
+						<div class="ub ub-f1 bc-text">
+							<span>订单编号</span>
+							<span class="ForderNum"></span>
+						</div>
+						<div class="ub lscolor">
+							待发货
+						</div>
+					</div>
+					<div class="ub">
+						<div class="ub shenhe_left">
+							<img class="Fimgs" src="" />
+						</div>
+						<div class="ub ub-f1 ub-ver shehe_right">
+							<div class="ub right_top">
+								<span class="uhide">第</span>
+								<span class="uhide">12</span>
+								<span class="uhide">期</span>
+								<span class="FMingC">0元购 iPhone 7(128G)</span>
+							</div>
+							<div class="ub  shenhe_item02 sc-text">
+								<div class="ub ub-f1">
+									投资金额
+								</div>
+								<div class="ub">
+									<span>￥</span>
+									<span class="Fmoney">0.00</span>
+								</div>
+							</div>
+							<div class="ub shenhe_item02 sc-text">
+								<div class="ub ub-f1">
+									年利率
+								</div>
+								<div class="ub">
+									<span class="FLiX_prepose">0</span>
+									<span>%</span>
+								</div>
+							</div>
+							<div class="ub shenhe_item02 sc-text">
+								<div class="ub ub-f1">
+									期限
+								</div>
+								<div class="ub">
+									<span class="FTouZqx"></span>
+									<span class="Fdw"></span>
+								</div>
+							</div>
+							<div class="ub shenhe_item02 sc-text">
+								<div class="ub ub-f1">
+									前置利息额度
+								</div>
+								<div class="ub">
+									<span>￥</span>
+									<span class="FqzLix">0.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ub ub-ver shehe_botom">
+					<div class="ub sc-text  botom_item">
+						<span>收货姓名：</span>
+						<span class="FLxrName"></span>
+					</div>
+					<div class="ub sc-text  botom_item">
+						<span>联系电话：</span>
+						<span class="FLxrPhone"></span>
+					</div>
+					<div class="ub sc-text  botom_item">
+						<span>收货地址：</span>
+						<span class="Faddress"></span>
+					</div>
+				</div>
+				<div class="ub botom_status">
+					<div class="ub ub-f1 color96">
+						利息前置额度支付
+					</div>
+					<div class="ub">
+						<span>实付</span>
+						<span class="lscolor">￥</span>
+						<span class="lscolor Fmoney"></span>
+					</div>
+				</div>
+				<div class="ub ub-pe small_btns Fshbtn">
+					<div class="ub ub-ac ub-pc btn_zf">
+						确认收货
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../common/js/jquery.1.10.2.js"></script>
+	</body>
+
+</html>
+<script>
+	var Fstart = 0;
+	var pageSize = 10;
+	appcan.ready(function() {
+		getLygOrderList();
+		appcan.frame.setBounce([0, 1], function(type) {
+			$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+		}, function(type) {
+			$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+		}, function(type) {
+			if(type == 0) {
+				Fstart = 0;
+				$(".list").empty();
+				getLygOrderList();
+			} else if(type == 1) {
+				getLygOrderList();
+			}
+			setTimeout(function() {
+				appcan.frame.resetBounce(type);
+			}, 1000);
+		})
+	});
+
+	function getLygOrderList() {
+		var parm = {
+			Fuserid: Fsuper.getuserid(),
+			FselectType: "3",
+			pageSize: pageSize,
+			Fstart: Fstart,
+		};
+		Fsuper.getrows('/ygylapp/getLygOrderList', parm, addorder, function() {});
+	}
+
+	function addorder(row, end) {
+		var strs = new Array();
+		strs = row.Fimgs.split(",");
+		var list = $(".list");
+		var item = $(".temp").clone();
+		var domitem = item.find(".items");
+		domitem.attr("id", row.Forderid);
+		domitem.find(".ForderNum").text(row.ForderNum);
+		domitem.find(".Faddress").text(row.Faddress);
+		domitem.find(".FLxrName").text(row.FLxrName);
+		domitem.find(".FLxrPhone").text(row.FLxrPhone);
+		domitem.find(".FLiX_prepose").text(row.FLiX_prepose);
+		domitem.find(".FMingC").text(row.FMingC);
+		domitem.find(".Fmoney").text(row.Fmoney);
+		domitem.find(".FqzLix").text(row.FqzLix);
+		domitem.find(".Fimgs").attr("src", Serverurl + "/" + strs[0]);
+		if(row.FJiXlx == "0") {
+			domitem.find(".FTouZqx").text(row.FTouZqx);
+			domitem.find(".Fdw").text("天");
+		} else {
+			domitem.find(".FTouZqx").text(row.FTouZqx);
+			domitem.find(".Fdw").text("月");
+		}
+		domitem.find(".Fshbtn").attr("onclick", "Fshbtn(" + row.Forderid + ",this)");
+		//domitem.find(".gotopay").attr("onclick", "gotopay(" + row.Forderid + ",this)");
+		list.append(domitem);
+		Fstart = end;
+	}
+	//打开常见问题
+	appcan.button(".cjwt", "ani-act", function(a, b) {
+
+		appcan.window.open("questions", "../questions/questions.html");
+		appcan.window.publish('questions', '');
+		//              appcan.window.publish('move', '1');
+	})
+	//确认收货
+	function Fshbtn(Fid,dom){
+		appcan.window.alert({
+				title: "提示",
+				content: "是否确定收货？",
+				buttons: ['取消', '确定'],
+				callback: function(err, data, dataType, optId) {
+					if(data == 1) {
+						appcan.ajax({
+							url: Serverurl + "/ygylapp/ConfireGoods",
+							type: "POST",
+							dataType: 'json',
+							data: {
+								FuserId: Fsuper.getuserid(),
+								FbillId: Fid,
+							},
+							success: function(result) {
+								var code = result.code;
+								var msg = result.msg;
+								var debug = result.debug;
+								if(code < 10000) {
+									if(code == 0) { //返回成功
+										appcan.window.openToast('收货成功', '2000');
+									}
+								} else {
+									appcan.window.openToast('收货失败', '2000');
+									if(Fsuperdbg) {
+										alert(result.code);
+										alert(result.msg);
+										alert(result.debug);
+									}
+								}
+
+							}
+						});
+					}
+				}
+			});
+	}
+</script>

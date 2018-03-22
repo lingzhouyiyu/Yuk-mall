@@ -1,0 +1,17 @@
+.changebox{ padding-top: 0.6em;}
+.change_item{ background: #fff; padding: 0.4em 0.6em; border-bottom: 1px solid #E1E1E1;}
+.change_item input{ outline: 0 none; border: 0 none;}
+.yzm{ color: #a4046b; font-size: 0.85em;}
+.btn_box{ margin:2em 1em 2em 1em;}
+.go_btn{ background: #a4046b; color: #fff; height: 2.8em; border-radius: 0.4em;}
+.change_item03{ padding:1em 0.6em;background: #fff; border-bottom: 1px solid #E1E1E1;}
+.right_img img{ width: 0.6em;}
+.top{ padding: 0.6em; color: #969696; background: #f0f0f0; font-size: 0.85em;}
+
+.changeCar{ position: fixed; left: 0; top: 0; width: 100%; height: 100%; filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#4C000000', endColorstr='#4C000000');background:rgba(0,0,0,0.3);}
+.car_main{ background: #fff; margin-left: 1.5em; margin-right: 1.5em; border-radius: 0.4em; margin-top: 50%;  }
+.car_title{ background: #f0f0f0; height: 3em; padding-left: 0.6em; border-top-left-radius: 0.4em; border-top-right-radius: 0.4em;}
+.car_tel{ padding: 1em;}
+.car_content{ padding:0 2.3em 1em 2.5em; word-break: break-all; }
+.car_btn{ height: 2.8em; border-top: 1px solid #E1E1E1; line-height: 2.8em;}
+.border-right{ border-right: 1px solid #E1E1E1;}

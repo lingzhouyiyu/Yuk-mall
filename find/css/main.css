@@ -1,0 +1,48 @@
+.a_1{
+    padding: 1em 0;
+    border-bottom: 6px solid #f0f0f0;
+}
+.a_1 .word{
+    padding: 0.5em 1em 1em 1em;
+}
+.a_1 .word .sfyz{width: 33.3%;}
+.a_1 .word .szjymm{width: 33.3%;}
+.a_1 .word .bdyhk{width: 33.3%;}
+.a_2{padding: 1em;border-bottom: 6px solid #f0f0f0;}
+.a_2 .word{padding-right: 2em;}
+.a_2 .xm{
+    padding: 0.5em 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.a_2 .sfz{
+    padding: 0.5em 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.a_2 .jjlxr{
+    padding: 0.5em 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.a_2 .jjlxrdh{
+    padding: 0.5em 0;
+}
+.a_3{
+padding: 2em 1em 1em 1em;}
+.a_3 .sqyz{
+    color: #F0F0F0;background: #382071;padding: 0.9em;border-radius: 6px;
+}.a_4{padding-bottom: 1em;font-size: 0.9em;}
+.a_4 .word{color: #b5b5b4;}
+.a_4 .num{color: #ff721f;}
+
+
+.main_box{ padding-top: 0.6em;}
+.input_item{ background: #fff; padding: 0.5em 1em; border-bottom: 1px solid #E1E1E1;}
+.pwd_input input{border: 0 none;}
+.margin_r{ margin-right: 1em;}
+.input_item02{ margin-bottom: 0.6em;}
+.sure_btn{ margin:2em 1em 1em 1em ; background: #a4046b; height: 2.8em; border-radius: 0.4em; color: #fff;}
+.find_pwd{ margin-right: 1em;}
+.yzm{ color: #a4046b; font-size: 0.85em;}
+.bg_white{ background: #fff;}
+
+.btn_box{ margin:2em 1em 2em 1em;}
+.go_btn{ background: #a4046b; color: #fff; height: 2.8em; border-radius: 0.4em;}

@@ -1,0 +1,21 @@
+.redmoney{ padding:2em  0.6em 1em 0.6em; border-bottom:1px solid #F0EFF2;}
+.content{ margin-bottom: 0.5em; line-height: 1.4em; padding: 0 0.6em;}
+.content2{ text-indent: 1em;}
+.bg_white{ background: #fff;}
+
+.redtop{ background: #ff2e4d; height: 6em; border-radius: 0 0 50% 50%; width: 100%;}
+.headimg{border: 1px solid #BD503A;
+	border-radius: 50%;
+	overflow: hidden; height: 4em; width: 4em; margin-top: -2em;}
+.redbg{ background: #F1F1F1;}
+
+.redtitle{ padding: 2em 0 1em 0;}
+.btitle{ font-weight: bold; font-size: 1.75em;}
+.lqmxben{ height: 2.6em; border-bottom: 1px solid #e8e8e8;}
+.symxben{ height: 2.6em; border-bottom: 1px solid #e8e8e8; }
+.getitem{  border-bottom: 1px solid #e8e8e8; padding: 0.5em 0.6em;}
+.cole96{ color: #969696; font-size: 0.85em;}
+.font125{ font-size: 1.25em;}
+.syline{ height: 0.6em; background: #F5F5F5;}
+.dhide{ display: none !important;}
+.imgwith{ width: 0.75em;}

@@ -1,0 +1,53 @@
+.f_1{
+	
+	padding: 1em;
+	
+}
+.f_1 textarea{
+	overflow-x:visible;
+	overflow-y:visible;
+	border: none;
+	height: 10em;
+	  resize : none;
+	  border: 1px solid #c1c1c1;
+	  outline: 0 none;
+	  padding: 5px;
+}
+.f_2{
+	margin:  0.4em 1em;
+	border-bottom: 1px solid #c1c1c1;
+	
+}
+.f_2 input{
+	border: none;
+	font-size: 1em;
+	height: 2.5em;
+}
+.f_3{
+	padding: 2em 1em 1em 1em;
+	color: #F0F0F0;
+	
+}
+.f_3 .f_btn{
+	background: #a4046b;
+	height: 2.8em;
+	border-radius: 8px ;
+}
+.f_4{
+	padding: 1em;
+}
+.f_4 img{
+	vertical-align:middle;
+	margin-right: 0.4em;
+	width: 1.5em;
+}
+.f_4 .fk{
+	margin-bottom: 1em;
+}
+.f_4 .wb{
+	margin-bottom: 0.5em;
+}
+.f_4 span{
+	color: #707070;
+}
+.bg_white{ background: #fff;}

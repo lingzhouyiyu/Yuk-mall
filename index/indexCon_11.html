@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc_white ub" ontouchstart>
+		<div class="lefttemp uhide">
+			<div class="ub ub-ac ub-pc nav_item   leftitems Fname">
+
+			</div>
+		</div>
+		<div class="ub ub-f1">
+			<!-- 左侧导航-->
+			<div class="ub  ub-ver left_nav leftcategory">
+				<!--<div class="ub ub-ac ub-pc nav_item  nav_active">
+					宜众便利
+				</div>
+				<div class="ub ub-ac ub-pc nav_item">
+					酒水饮料
+				</div>
+				<div class="ub ub-ac ub-pc nav_item">
+					美妆个护
+				</div>-->
+			</div>
+			<!-- 右侧列表-->
+			<div class="ub ub-ver ub-f1 cont_box">
+				<!-- 右侧宜众便利列表头部图片-->
+				<div class="ub ub-ver yzbl_mainList">
+					<div class="ub outbox ub-ver ">
+						<div class="yl_add01 uhide">
+							<img src="../common/images/yl_add01.jpg" />
+						</div>
+						<div class=" ub ub-ver listchilds" style="padding-top: 0.3em;">
+
+						</div>
+						<div class="childstemp uhide">
+							<div class="ub  ub-f1 main_item childsitems">
+								<div class="ub ub-f1 ub-fh ub-ver cont_left ">
+									<div class="ub ub-ver cont_item one_item">
+										<img class="Fimgs" class="ub-img" src="" />
+										<div class="ub txthide ub-ac ub-pc Fname">
+										</div>
+									</div>
+								</div>
+								<div class="ub ub-f1 ub-fh ub-ver cont_center ">
+									<div class="ub ub-ver cont_item one_item">
+										<img class="Fimgs" class="ub-img" src="" />
+										<div class="ub ub-ac  txthide ub-pc Fname">
+										</div>
+									</div>
+								</div>
+								<div class="ub ub-f1 ub-fh ub-ver cont_right ">
+									<div class="ub ub-ver cont_item one_item">
+										<img class="Fimgs" class="ub-img" src="" />
+										<div class="ub txthide ub-pc ub-ac Fname">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 右侧一行-->
+						<!-- 右侧一行-->
+						<!--<div class="ub  ub-f1 main_item">
+							<div class="ub ub-f1 ub-fh ub-ver cont_left">
+								<div class="ub ub-ver cont_item one_item">
+									<img class="ub-img" src="../common/images/yi01.jpg" />
+									<div class="ub txthide ub-ac ub-pc">
+										食品生鲜
+									</div>
+								</div>
+							</div>
+							<div class="ub ub-f1 ub-fh ub-ver cont_center">
+								<div class="ub ub-ver cont_item one_item">
+									<img class="ub-img" src="../common/images/yi01.jpg" />
+									<div class="ub ub-ac  txthide ub-pc">
+										酒水饮料
+									</div>
+								</div>
+							</div>
+							<div class="ub ub-f1 ub-fh ub-ver cont_right">
+								<div class="ub ub-ver cont_item one_item">
+									<img class="ub-img" src="../common/images/yi01.jpg" />
+									<div class="ub txthide ub-pc ub-ac ">
+										酒水饮料
+									</div>
+								</div>
+							</div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			getCataGory();
+		});
+		
+//		function getCataGory() {
+//			var furl = "/ygylapp/getCataGory";
+//			$.ajax({
+//				url: Serverurl + furl,
+//				type: "POST",
+//				dataType: "json",
+//				success: function(result) {
+//					rows = result.data;
+//					var code = result.code;
+//					var msg = result.msg;
+//					var debug = result.debug;
+//					var Firstid = "";
+//					if(code < 10000) {
+//						if(code == 0) { //返回成功
+//							$(rows).each(function(i, row) {
+//								additem(row, i);
+//							});
+//
+//						}
+//					} else {
+//						if(Fsuperdbg) {
+//							alert(result.code);
+//							alert(result.msg);
+//							alert(result.debug);
+//						}
+//					}
+//				}
+//			});
+//		}
+		var childs = "";
+		function getCataGory() {
+			Fsuper.getrowsandindex('/ygylApp/getCataGory', additem,function(){
+				getGoodsAttrbuteChildByIdfist(childs);
+			});
+		}
+		function additem(row,i ) {
+			var list = $(".leftcategory");
+			var clonedom = $(".lefttemp").clone();
+			var itemdom = clonedom.find(".leftitems");
+			if(i == 0) {
+				itemdom.addClass("nav_active");
+				childs = JSON.stringify(row.childs)
+			}
+			itemdom.attr("id", row.Fid);
+			itemdom.text(row.Fname);
+			itemdom.attr("rowdata", JSON.stringify(row.childs));
+			itemdom.attr("onclick", "getGoodsAttrbuteChildById(this)");
+			list.append(itemdom);
+		}
+
+		function getGoodsAttrbuteChildById(dom) {
+			$(".leftitems").removeClass("nav_active");
+			$(dom).addClass("nav_active");
+			$(".listchilds").empty();
+			var data = $.parseJSON($(dom).attr("rowdata"));
+			var lengths = data.length;
+			for(var j = 0; j < lengths / 3; j++) {
+				var goodslist = $(".listchilds");
+				var clonedom = $(".childstemp").clone();
+				var goodsdom = clonedom.find(".childsitems");
+				var findes = 3 * (j + 1);
+				var iindex = 3 * j;
+				for(var i = iindex; i < findes; i++) {
+					if(data[i] != undefined) {
+						console.log(data[i]);
+						var strs = new Array();
+						if(data[i].Fimgs != "") {
+							strs = data[i].Fimgs.split(",");
+						}
+						if(i % 3 == 0) {
+							//goodsdom.find(".cont_left").removeClass("uhide");
+							goodsdom.find(".cont_left").attr("id", data[i].Fid);
+							goodsdom.find(".cont_left").attr("onclick", "getGoods('" + data[i].Fid + "',this)");
+							goodsdom.find(".cont_left .Fname").text(data[i].Fname);
+							goodsdom.find(".cont_left .Fimgs").attr("src", Serverurl + "/" + strs[0]);
+						} else if(i % 3 == 1) {
+							//goodsdom.find(".cont_center").removeClass("uhide");
+							goodsdom.find(".cont_center").attr("id", data[i].Fid);
+							goodsdom.find(".cont_center .Fname").text(data[i].Fname);
+							goodsdom.find(".cont_center").attr("onclick", "getGoods('" + data[i].Fid + "',this)");
+							goodsdom.find(".cont_center .Fimgs").attr("src", Serverurl + "/" + strs[0]);
+						} else if(i % 3 == 2) {
+							//goodsdom.find(".cont_right").removeClass("uhide");
+							goodsdom.find(".cont_right").attr("id", data[i].Fid);
+							goodsdom.find(".cont_right .Fname").text(data[i].Fname);
+							goodsdom.find(".cont_right").attr("onclick", "getGoods('" + data[i].Fid + "',this)");
+							goodsdom.find(".cont_right .Fimgs").attr("src", Serverurl + "/" + strs[0]);
+						}
+					}
+				}
+				console.log(goodsdom);
+				goodslist.append(goodsdom);
+			}
+		}
+
+		function getGoodsAttrbuteChildByIdfist(dom) {
+			$(".listchilds").empty();
+			var data = $.parseJSON(dom);
+			var lengths = data.length;
+			for(var j = 0; j < lengths / 3; j++) {
+				var goodslist = $(".listchilds");
+				var clonedom = $(".childstemp").clone();
+				var goodsdom = clonedom.find(".childsitems");
+				var findes = 3 * (j + 1);
+				var iindex = 3 * j;
+				for(var i = iindex; i < findes; i++) {
+					if(data[i] != undefined) {
+						var strs = new Array();
+						if(data[i].Fimgs != "") {
+							strs = data[i].Fimgs.split(",");
+						}
+						if(i % 3 == 0) {
+							//goodsdom.find(".cont_left").removeClass("uhide");
+							goodsdom.find(".cont_left").attr("id", data[i].Fid);
+							goodsdom.find(".cont_left").attr("onclick", "getGoods('" + data[i].Fid + "',this)");
+							goodsdom.find(".cont_left .Fname").text(data[i].Fname);
+							goodsdom.find(".cont_left .Fimgs").attr("src", Serverurl + "/" + strs[0]);
+						} else if(i % 3 == 1) {
+							//goodsdom.find(".cont_center").removeClass("uhide");
+							goodsdom.find(".cont_center").attr("id", data[i].Fid);
+							goodsdom.find(".cont_center .Fname").text(data[i].Fname);
+							goodsdom.find(".cont_center").attr("onclick", "getGoods('" + data[i].Fid + "',this)");
+							goodsdom.find(".cont_center .Fimgs").attr("src", Serverurl + "/" + strs[0]);
+						} else if(i % 3 == 2) {
+							//goodsdom.find(".cont_right").removeClass("uhide");
+							goodsdom.find(".cont_right").attr("id", data[i].Fid);
+							goodsdom.find(".cont_right .Fname").text(data[i].Fname);
+							goodsdom.find(".cont_right").attr("onclick", "getGoods('" + data[i].Fid + "',this)");
+							goodsdom.find(".cont_right .Fimgs").attr("src", Serverurl + "/" + strs[0]);
+						}
+					}
+				}
+				console.log(goodsdom);
+				goodslist.append(goodsdom);
+			}
+		}
+		//左侧导航
+		$(".left_nav div").click(function() {
+			$(".left_nav div").removeClass("nav_active");
+			$(this).addClass("nav_active");
+		});
+
+		//打开列表详情页
+		function getGoods(Fid, dom) {
+			appcan.locStorage.setVal("Fcatid", Fid);
+			appcan.window.open("cateDetail", "../cateDetail/cateDetail.html");
+		}
+	</script>
+
+</html>

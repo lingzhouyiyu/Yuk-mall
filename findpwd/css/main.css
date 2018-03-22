@@ -1,0 +1,11 @@
+.main_box{ padding-top: 0.6em;}
+.input_item{ background: #fff; padding: 0.5em 1em; border-bottom: 1px solid #E1E1E1;}
+.pwd_input input{border: 0 none;}
+.margin_r{ margin-right: 1em;}
+.input_item02{ margin-bottom: 0.6em;}
+.sure_btn{ margin:2em 1em 1em 1em ; background: #382071; height: 2.8em; border-radius: 0.4em; color: #fff;}
+.find_pwd{ margin-right: 1em;}
+.yzm{ color: #a4046b; font-size: 0.85em;}
+
+.btn_box{ margin:2em 1em 2em 1em;}
+.go_btn{ background: #a4046b; color: #fff; height: 2.8em; border-radius: 0.4em;}

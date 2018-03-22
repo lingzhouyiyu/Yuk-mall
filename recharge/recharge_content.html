@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+        <link rel="stylesheet" href="../common/css/appcan.control.css">
+        <link rel="stylesheet" href="../common/css/ui-box.css">
+        <link rel="stylesheet" href="../common/css/ui-base.css">
+        <link rel="stylesheet" href="../common/css/ui-color.css">
+        <link rel="stylesheet" href="../common/css/appcan.icon.css">
+        <link rel="stylesheet" href="../common/css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body class="um-vp bc-bg" ontouchstart>
+        <!--充值-->
+        <div class="ub ub-ver recharge changebox" id="rechargeid">
+            <div class="ub ub-f1 ub-ac ub-pc recharge_num bc-text">
+                <div class="ub">充值金额:</div>
+                <div class="ub ub-f1 uinput">
+                    <input class="ub ub-f1  FCzJe" type="text" placeholder="请输入充值金额" />
+                </div>
+            </div>
+            <div class="ub ub-f1 ub-ac ub-pc recharge_num bc-text">
+                <div class="ub">交易密码:</div>
+                <div class="ub ub-f1 uinput">
+                    <input class="ub ub-f1  FCzmm" type="password" placeholder="请输入交易密码" />
+                </div>
+            </div>
+            <div class="ub ub-ac  recharge_black bc-text">
+                <span>您当前可用余额：￥</span>
+                <span class="Fyue">0.00</span>
+            </div>
+            <div class="ub ub-ac ub-pc ub-f1 recharge_btn">
+                立即充值
+            </div>
+        </div>
+        <script type="text/javascript" src="../common/js/jquery-2.1.4.min.js"></script>
+        <script src="../common/js/appcan.js"></script>
+        <script src="../common/js/appcan.control.js"></script>
+        <script type="text/javascript" src="../common/js/yfkj.js"></script>
+        <script type="text/javascript" src="../common/js/yfkj.js"></script>
+        <script type="text/javascript" src="../common/js/Safe.js"></script>
+        <script type="text/javascript" src="../common/js/jquery.md5.js"></script>
+        <script type="text/javascript" src="../common/js/des.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            getmessages();
+
+        });
+        //打开常见问题
+        appcan.button(".cjwt", "ani-act", function(a, b) {
+
+                appcan.window.open("questions", "../questions/questions.html");
+                appcan.window.publish('questions', '');
+                //              appcan.window.publish('move', '1');
+            })
+            //查询用户余额
+        var Fjymtype = "";
+
+        function getmessages() {
+            var parm = {
+                Fuserid: Fsuper.getuserid()
+            };
+            appcan.ajax({
+                url: Serverurl + "/ygylapp/getmessages",
+                type: "POST",
+                dataType: "json",
+                data: parm,
+                success: function(result) {
+                    var rows = result.data[0];
+                    var code = result.code;
+                    var msg = result.msg;
+                    var debug = result.debug;
+                    if(code < 10000) {
+                        if(code == 0) { //返回成功
+                            $(".Fyue").text(rows.Fyue.toFixed(2));
+                            Fjymtype = rows.Fpaypwd;
+                        }
+                    } else {
+                        if(Fsuperdbg) {
+                            alert(result.code);
+                            alert(result.msg);
+                            alert(result.debug);
+                        }
+                    }
+                }
+            });
+
+        }
+        var Fcztag = 0;
+        //立即支付
+        appcan.button(".recharge_btn", "ani-act", function(a, b) {
+            if(Fcztag == 0) {
+                Fcztag = 1;
+                if(Fjymtype == "0") {
+                    appcan.window.openToast('请到账户与安全中心设置交易密码', '2000');
+                    return;
+                }
+                var FCzJe = $(".FCzJe").val();
+                if(FCzJe == "") {
+                    appcan.window.openToast('充值金额不能为空', '2000');
+                    return;
+                }
+                var Fpaypwd = $(".FCzmm").val();
+                if(Fpaypwd == "") {
+                    appcan.window.openToast('交易密码不能为空', '2000');
+                    return;
+                }
+                var parm = {
+                    Fuserid: Fsuper.getuserid(),
+                    Fpaypwd: $.md5($(".FCzmm").val()),
+                }
+                Safe.post("/ygylapp/CheckPassword", parm, function(result) {
+                    var code = result.code;
+                    if(code == 0) {
+                        var parm = {
+                            Fuserid: Fsuper.getuserid(),
+                            FCzJe: $(".FCzJe").val(),
+                            Fsupersign: result.data
+                        }
+                        Safe.post("/ygylapp/CZCheckSign", parm, function(result) {
+                            var code = result.code;
+                            if(code == 0) {
+                                if(result.msg != ""){
+                                    appcan.locStorage.setVal("FczorderNum", result.msg);
+                                    appcan.locStorage.setVal("FCzJe", FCzJe);
+                                    appcan.window.open("czpayment", "../czpay/czpayment.html");
+                                }
+                                Fcztag = 0;
+                                //调用支付宝
+                            } else {
+                                Fcztag = 0;
+                                return;
+                            }
+                        })
+                    } else if(code == 3) {
+                        appcan.window.openToast('交易密码错误', '2000');
+                        return;
+                    } else {
+                        return;
+                    }
+                })
+            }
+        })
+    </script>
+
+</html>

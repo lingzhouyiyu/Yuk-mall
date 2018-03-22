@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver bc-text main_box">
+
+			<div class="ub  ub-ac ub-f1 input_item">
+
+				<div class="ub ub-f1 pwd_input uinput">
+					<input id="Fphone" class="ub ub-f1  newFpwd" type="text" placeholder="请输入账号(企业号/手机号)" />
+				</div>
+			</div>
+			<div class="ub  ub-ac ub-f1 input_item uinput">
+				<input id="Frcord" class="ub ub-f1" type="text" placeholder="请输入验证码" />
+				<div id="btncheck" class="ub ub-ac ub-pe yzm">
+					获取验证码
+				</div>
+			</div>
+		</div>
+		<div class="ub btn_box">
+			<div class="ub ub-ac ub-pc ub-f1 go_btn">
+				下一步
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../common/js/jquery-2.1.4.min.js"></script>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script src="../common/js/appcan.tab.js"></script>
+	<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	<script type="text/javascript" src="../common/js/jquery.md5.js"></script>
+	<script type="text/javascript" src="../common/js/Safe.js"></script>
+	<script type="text/javascript" src="../common/js/des.js"></script>
+	<script>
+		var Fidentifier = "";
+		var msg = "";
+		var wait = 60;
+		var cantag = 0;
+		/*计时器函数*/
+		function time(o) {
+			var tso = o;
+			if(wait == 0) {
+				o.innerHTML = "免费获取验证码";
+				wait = 60;
+				cantag = 0;
+				$(o).removeClass("disclick");
+			} else {
+				o.innerHTML = "重新发送(" + wait + ")";
+				wait--;
+				setTimeout(function() {
+					time(o)
+				}, 1000)
+			}
+		}
+		//点击验证码
+		appcan.button("#btncheck", "ani-act", function() {
+				var Fphone = $("#Fphone").val();
+				if(Fphone == "") {
+					appcan.window.openToast('手机号不能为空！', '1000');
+					return;
+				}
+				if(Fphone && /^1[3|4|5|8]\d{9}$/.test(Fphone)) {} else {
+					appcan.window.openToast("不是有效的手机号", 2000, 5);
+					return;
+				}
+				var o = this;
+				var parm = {
+					Fphone: $("#Fphone").val() //电话密码
+				};
+				appcan.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: "http://dzyryd2.shop0301.com"+ "/app/checkUser",
+					data: parm,
+					success: function(result) {
+						if(result.code == 1) {
+							if(cantag == 0) {
+								sendcode();
+								$(this).addClass("disclick");
+								time(o);
+								cantag = 1;
+							};
+						} else {
+							appcan.window.openToast('该手机号不存在!', '1000');
+							return;
+						}
+					},
+					error: function() {
+						appcan.window.openToast('服务器出错!', '1000');
+					}
+				});
+			})
+			/*获取验证码*/
+		function sendcode() {
+			var Fphone = $("#Fphone").val();
+			var furl = "http://dzyryd2.shop0301.com" + "/app/sendCode";
+			var parm = {
+				Fphone: Fphone
+			}
+			Safe.apppost(furl, parm, function(result) {
+				var code = result.code;
+				var msg = result.msg;
+				if(code == 1) {
+					appcan.window.openToast('验证码发送成功！', '1000', 5);
+					Fidentifier = result.msg;
+					
+				} else {
+					appcan.window.openToast('验证码发送失败！', '1000');
+				}
+			})
+		}
+
+		function checkcode() {
+			var Frand_code = $("#Frcord").val();
+			if(Frand_code == "") {
+				appcan.window.openToast('验证码不能为空！', '1000', 5);
+				return;
+			}
+			appcan.ajax({
+				url: "http://dzyryd2.shop0301.com" + "/app/changePwdcheckcode",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					Frand_code: Frand_code,
+					Fidentifier: Fidentifier,
+					phone: $("#Fphone").val(),
+					pwd: ''
+				},
+				success: function(result) {
+					if(result.code == 1) {
+						var Fphone = $("#Fphone").val().trim();
+						appcan.locStorage.setVal("changephone", Fphone);
+						appcan.window.open("findpwd01", "../findpwd/findpwd01/findpwd01.html");
+
+					} else {
+						appcan.window.openToast('验证码错误!', '1000', 5);
+					}
+				},
+				error: function(e) {
+					appcan.window.openToast('服务器出错!', '1000', 5);
+				}
+			});
+		}
+		//下一步
+		appcan.button(".go_btn", "ani-act", function(a, b) {
+			checkcode();
+			//var Fphone = $("#Fphone").val().trim();
+			//appcan.locStorage.setVal("changephone", Fphone);
+			//appcan.window.open("findpwd01", "../findpwd/findpwd01/findpwd01.html");
+		})
+	</script>
+
+</html>

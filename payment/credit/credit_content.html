@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+        <link rel="stylesheet" href="../../common/css/appcan.control.css">
+        <link rel="stylesheet" href="../../common/css/ui-box.css">
+        <link rel="stylesheet" href="../../common/css/ui-base.css">
+        <link rel="stylesheet" href="../../common/css/ui-color.css">
+        <link rel="stylesheet" href="../../common/css/appcan.icon.css">
+        <link rel="stylesheet" href="../../common/css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub ub-ver list">
+
+        </div>
+        <div class="uhide tmp">
+            <div class=" ub ub-ver choose_item" Fid="" onclick="choose(this);">
+                <!--流水宝 -->
+                <div class="ub ub-f1 ub-pj top choose">
+                    <div class="ub ub-ac ">
+                        <div class="ub umar-l bc-text FMingc"></div>
+                    </div>
+                    <div class="ub ub-ver">
+                        <div class="ub ub-pe  ">
+                            <div class="ub ub-ac   dbcheck ">
+                                <div class="ub allcheck check_radio"></div>
+                                <img class="check_ok ub-img uhide" src="../credit/css/myImg/1.png" />
+                            </div>
+                        </div>
+                        <div class="ub ub-ac m_num">
+                            <span class="sy">剩余￥</span><span class="Fsyje"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 投资金额 时间   利率 额度-->
+                <div class="ub ub-ver ub-pc ub-f1 content ">
+                    <div class="ub ub-pc ">
+                        <div class="ub ub-fh ub-ac ub-f1 ">
+                            <span class="hs">投资金额</span><span class="Fmoney"></span>
+                        </div>
+                        <div class="ub ub-f1 ub-ac ub-fh">
+                            <span class="hs">投资时间</span><span class="FdownTime"></span>
+                        </div>
+                    </div>
+                    <div class="ub ">
+                        <div class="ub ub-fh ub-ac ub-f1 ">
+                            <span class="hs">年化利率</span><span class="FLiX">10</span><span>%</span>
+                        </div>
+                        <div class="ub ub-f1 ub-ac ub-fh">
+                            <span class="hs">授信额度</span><span class="zs Fmoney"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--确认 -->
+        <div class="ub ub-ac ub-pc qr">
+            <div class="ub ub-ac ub-f1 ub-pc qr_btn">
+                确认
+            </div>
+        </div>
+        <!--交易密码弹窗-->
+        <div class="tranpwd ">
+            <div class="ub ub-ver tranpwd_main">
+                <div class="ub ub-f1 ub-ac tranpwd_top bc-text">
+                    <div class="ub ub-ac  ub-pc ub-f1">
+                        交易密码
+                    </div>
+                </div>
+                <div class="ub ub-ac ub-pc tranpwd_center">
+                    <div class="ub uinput ub-f1 tranpwd_input umar-r">
+                        <input class="ub ub-f1  jymm" type="password" />
+                    </div>
+                    <div class="ub  colorred">
+                        *
+                    </div>
+                </div>
+                <div class="ub ub-pe gofind">
+                    忘记密码
+                </div>
+                <div class="ub ub-ac ub-pc ub-f1 btn_box">
+
+                    <div class="ub ub-ac ub-pc ub-f1 ub-fh out_btn">
+                        取消
+                    </div>
+                    <div class="ub ub-ac ub-pc ub-f1 ub-fh sure_btn">
+                        确认
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../../common/js/appcan.js"></script>
+    <script src="../../common/js/appcan.control.js"></script>
+    <script src="../../common/js/appcan.tab.js"></script>
+    <script src="../../common/js/jquery-2.1.4.min.js"></script>
+    <script src="../../common/js/yfkj.js"></script>
+    <script src="../../common/js/jquery.md5.js"></script>
+    <script src="../../common/js/des.js"></script>
+    <script src="../../common/js/Safe.js"></script>
+    <script>
+        //弹出输入密码
+        appcan.button(".qr_btn", "ani-act", function(a, b) {
+            $(".tranpwd").addClass("uhide");
+            $(".tranpwd").removeClass("uhide");
+        })
+        appcan.button(".sure_btn", "ani-act", function(a, b) {
+            var Fpaypwd = $(".jymm").val();
+            if (Fpaypwd == "") {
+                appcan.window.openToast('交易密码不能为空', '1000');
+                return;
+            }
+            var parm = {
+                Fuserid : Fsuper.getuserid(),
+                Fpaypwd : $.md5(Fpaypwd),
+            }
+            Safe.post("/YgylApp/CheckPassword", parm, function(result) {
+                var code = result.code;
+                var data = result.data;
+                if (code == 0) {
+                    var ids = getids();
+                    if (ids == "") {
+                        appcan.window.openToast('请选择付款标', '1000');
+                        return;
+                    }
+                    var Forderid = "-1";
+                    var Ftag = "-1";
+                    if (appcan.locStorage.getVal("FseleId") == "sc") {
+                        Forderid = appcan.locStorage.getVal("ForderId");
+                        Ftag = 0;
+                    } else if (appcan.locStorage.getVal("FseleId") == "xf") {
+                        Forderid = appcan.locStorage.getVal("FXforderId");
+                        Ftag = 1;
+                    }
+                    var parm = {
+                        Fuserid : Fsuper.getuserid(),
+                        Forderid : Forderid,
+                        Ftag : Ftag,
+                        hqid : ids,
+                        Fsupersign : result.data,
+                    };
+                    Safe.post("/YgylApp/huoqixiazhan", parm, function(result) {
+                        var code = result.code;
+                        if (code == 0) {//返回成功
+                            gethqkymx();
+                            $(".tranpwd").addClass("uhide");
+                            appcan.window.openToast('付款成功', '1000');
+                            if (Ftag == 0) {
+                                 appcan.locStorage.setVal("ordersindex", 2);
+                                appcan.window.open("orders", "../../orders/orders.html");
+                            } else if (Ftag == 1) {
+                                appcan.window.open("orders", "../../orders/xforders/xforders.html");
+                            }
+                        } else if (code == 2) {
+                            appcan.window.openToast('所选标不够支付', '1000');
+                        } else if (code == 1) {
+                            appcan.window.openToast('请选择付款标', '1000');
+                        } else if (code == 4) {
+                            appcan.window.openToast('支付金额不能为0', '1000');
+                        }
+                    })
+                } else if (code == 3) {
+                    appcan.window.openToast('交易密码错误', '1000');
+                    return;
+                } else {
+                    return;
+                }
+            })
+        })
+        //取消
+        appcan.button(".out_btn", "ani-act", function(a, b) {
+            $(".jymm").val("");
+            $(".tranpwd").addClass("uhide");
+        })
+
+        appcan.ready(function() {
+            gethqkymx();
+        })
+        function gethqkymx() {
+            var parm = {
+                Fuserid : Fsuper.getuserid()
+            };
+            appcan.ajax({
+                url : Serverurl + "/YgylApp/gethqkymx",
+                type : "POST",
+                dataType : "json",
+                data : parm,
+                success : function(result) {
+                    var rows = result.data;
+                    var code = result.code;
+                    var msg = result.msg;
+                    var debug = result.debug;
+                    if (code < 10000) {
+                        if (code == 0) {//返回成功
+                            var list = $(".list");
+                            list.empty();
+                            $(rows).each(function(i, row) {
+                                additem(list, row);
+                            })
+                        }
+                    } else {
+                        if (Fsuperdbg) {
+                            alert(result.code);
+                            alert(result.msg);
+                            alert(result.debug);
+                        }
+                    }
+                }
+            });
+        }
+
+        function choose(dom) {
+            var cur_img = $(dom).find(".dbcheck img");
+            var cur_radio = $(dom).find(".dbcheck .check_radio");
+            if ($(cur_img).hasClass("uhide")) {
+                $(cur_img).removeClass("uhide");
+                $(dom).addClass("cheack");
+                $(cur_radio).addClass("uhide");
+            } else {
+                $(cur_img).addClass("uhide");
+                $(cur_radio).removeClass("uhide");
+                $(dom).removeClass("cheack");
+
+            }
+        }
+
+        function additem(list, row) {
+            var item = $(".tmp").find(".choose_item").clone();
+            item.attr("Fid", row.Fid);
+            item.find(".FMingc").text(row.FMingC);
+            item.find(".Fsyje").text(row.Fsyje);
+            item.find(".FdownTime").text(row.FdownTime.substr(0, 10));
+            item.find(".Fmoney").text(row.Fmoney);
+            item.find(".FLiX").text(row.FLiX);
+            list.append(item);
+        }
+
+        function getids() {
+            var ids = "";
+            var items = $(".cheack");
+            $(items).each(function(i, item) {
+                ids = ids + $(item).attr("Fid") + ',';
+            })
+            if (ids != "") {
+                ids = ids.substr(0, ids.length - 1);
+            }
+            return ids;
+        }
+
+        function huoqixiazhan() {
+            var ids = getids();
+            if (ids == "") {
+                appcan.window.openToast('请选择付款标', '1000');
+                return;
+            }
+            var Forderid = "-1";
+            var Ftag = "-1";
+            if (appcan.locStorage.getVal("FseleId") == "sc") {
+                Forderid = appcan.locStorage.getVal("ForderId");
+                Ftag = 0;
+            } else if (appcan.locStorage.getVal("FseleId") == "xf") {
+                Forderid = appcan.locStorage.getVal("FXforderId");
+                Ftag = 1;
+            }
+
+            var parm = {
+                Fuserid : Fsuper.getuserid(),
+                Forderid : Forderid,
+                Ftag : Ftag,
+                hqid : ids
+            };
+            appcan.ajax({
+                url : Serverurl + "/YgylApp/huoqixiazhan",
+                type : "POST",
+                dataType : "json",
+                data : parm,
+                success : function(result) {
+                    var rows = result.data;
+                    var code = result.code;
+                    var msg = result.msg;
+                    var debug = result.debug;
+                    if (code < 10000) {
+                        if (code == 0) {//返回成功
+                            gethqkymx();
+                            appcan.window.openToast('付款成功', '1000');
+                            if (Ftag == 0) {
+                                appcan.window.open("orders", "../../orders/orders.html");
+                            } else if (Ftag == 1) {
+                                appcan.window.open("orders", "../../orders/xforders/xforders.html");
+                            }
+                        } else if (code == 2) {
+                            appcan.window.openToast('所选标不够支付', '1000');
+                        } else if (code == 1) {
+                            appcan.window.openToast('请选择付款标', '1000');
+                        }
+                    } else {
+                        if (Fsuperdbg) {
+                            alert(result.code);
+                            alert(result.msg);
+                            alert(result.debug);
+                        }
+                    }
+                }
+            });
+        }
+        
+        //忘记密码
+        appcan.button(".gofind", "ani-act", function(a, b) {
+
+            appcan.window.open("find", "../../find/find.html");
+        })
+    </script>
+
+</html>

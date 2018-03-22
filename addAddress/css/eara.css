@@ -1,0 +1,8 @@
+@charset "UTF-8";
+/**CSS Reset**/
+body, div, span, h1, h2, h3, h4, h5, h6, header, footer, section, article, aside, details, figcaption, figure, hgroup, nav, menu, address, time, canvas, audio, video, p, pre, sup, sub, ul, ol, li, dl, dt, dd, form, input, button, textarea, select, iframe, img, a { padding: 0; margin: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+header, footer, section, article, aside, details, figcaption, figure, hgroup, nav, menu { display: block; }
+html, body { font-size: 20px; -webkit-overflow-scrolling: touch; }
+body { background-color: #eee; color: #333; font-family: "Helvetica Neue", "Microsoft Yahei", Tahoma, Arial, Roboto, "Droid Sans", "Droid Sans Fallback", "Heiti SC", sans-self; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+ul, ol { list-style-type: none; }

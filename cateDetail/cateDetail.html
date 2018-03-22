@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+           <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../common/css/ui-box.css">
+        <link rel="stylesheet" href="../common/css/ui-base.css">
+        <link rel="stylesheet" href="../common/css/ui-color.css">
+        <link rel="stylesheet" href="../common/css/appcan.icon.css">
+        <link rel="stylesheet" href="../common/css/appcan.control.css">
+         <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="page_0" class="up ub ub-ver " tabindex="0">
+            <!--header开始-->
+            <div class="uh bc-head ub-ac bc-text-head  bc-border" style="background: #a4046b;  height:3.3em;" id="header">
+                    <div class="ub">
+                        <div class="nav-btn nav_left" id="nav-left">
+                            <div class="ub-img1 gomessag">
+                               <div class="fa fa-angle-left fa-2x"></div>
+                            </div>
+                        </div>
+                        <h1 class="ut ub-f1   ut-s tx-c" tabindex="0" style="font-size: 1em;">
+                        <div class="ub-fh bg_white" style="z-index:100; border-radius: 0.4em; ">
+                                <div class="uinn-a1">
+                                    <form onsubmit="alert('submit')">
+                                        <div class="ub ub-ac uc-a1 uinput c-wh-ele uinn-ele2">
+                                            <div class="uwh-ele1 ub-img ele-search"></div>
+                                            <div class="ub-f1 uinn1">
+                                                <input placeholder="搜索商品" type="search" class="ulev-ele">
+                                            </div>
+                                            <div class="uwh-ele1 ub-img ele-sm"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </h1>
+                        <div class="nav-btn nav_right" id="nav-right">
+                            <div class="ub-img1 marginr6">
+                                <img class=" right_collect" style="width: 1.6em;" src="../common/images/collect.png" />
+                                <img class="right_car" style="width: 1.6em;" src="../common/images/shopcar.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 tx-l">
+
+            </div>
+            <!--content结束-->
+
+        </div>
+    </body>
+    <script src="../common/js/appcan.js"></script>
+    <script src="../common/js/appcan.control.js"></script>
+    <script src="../common/js/appcan.tab.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            var titHeight = $('#header').offset().height;
+            appcan.frame.open("content", "cateDetail_content.html", 0, titHeight);
+            window.onorientationchange = window.onresize = function() {
+                appcan.frame.resize("content", 0, titHeight);
+            }
+        });
+        //打开购物车
+		appcan.button(".right_car", "ani-act", function(a, b) {
+
+			appcan.window.open("shopCar", "../shopCar/shopCar.html");
+			//              appcan.window.publish('move', '1');
+		})
+		
+		//打开消息中心
+		appcan.button(".gomessag", "ani-act", function(a, b) {
+
+			appcan.window.close(-1);
+			//              appcan.window.publish('move', '1');
+		})
+		
+		//打开收藏夹
+		appcan.button(".right_collect", "ani-act", function(a, b) {
+
+			appcan.window.open("collect", "../collect/collect.html");
+			//              appcan.window.publish('move', '1');
+		})
+
+    </script>
+</html>

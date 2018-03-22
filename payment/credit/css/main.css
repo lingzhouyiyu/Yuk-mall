@@ -1,0 +1,26 @@
+
+
+.m_num{margin-right: 0.5em;}
+.top{padding: 0.5em ;border-top:6px solid #F0F0F0;border-bottom:1px solid #F0F0F0; background: #fff;}
+.sy{color:#aeaeae ;}
+.hs{display:block;color: #aeaeae;margin-right: 1em;padding: 1em 0.5em;}
+span{font-size: 0.9em;}
+.zs{color: #a4046b;}
+.allcheck{ width: 1em; height: 1em; border-radius: 50%;  border: 1px solid #9d9d9d;}
+.mall_img img{ width: 1.5em;}
+.check_ok{ width: 1em; height: 1em; border: 1px solid #51c696; border-radius: 50%;}
+
+.qr{ margin-top: 2em;}
+
+.gofind{ margin-right: 2em; font-size: 0.86em; color: #a4046b;}
+
+.qr_btn{ margin: 1em;border: 1px solid #a4046b; border-radius: 0.3em;background: #a4046b;height: 2.8em; color: #FFFFFF;}
+.content{ background: #fff;}
+.tranpwd{filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#4C000000', endColorstr='#4C000000');background:rgba(0,0,0,0.3);background:rgba(0,0,0,0.4); position: fixed; left: 0; top: 0; width: 100%; height: 100%;}
+.tranpwd_main{ margin-left: 1.5em; margin-right: 1.5em; background: #fff; top:50%; margin-top: -5.5em; border-radius: 0.4em; height: 11em; }
+.tranpwd_top{ background: #fff;  padding: 0 0.4em; border-top-left-radius: 0.4em; border-top-right-radius: 0.4em; height: 2.8em;}
+.tranpwd_top img{ width: 1.8em;}
+.tranpwd_center{ background: #fff; padding:0.5em 1em 1em 1em;}
+.tranpwd_input{ border: 1px solid #DCDEDF;}
+.tranpwd_center input{ height: 2.5em; border: 0 none; padding: 0 5px;}
+.btn_box{ padding: 0.6em 1em;}

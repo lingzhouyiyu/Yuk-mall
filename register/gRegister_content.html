@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/gRegister.css" />
+		<title></title>
+	</head>
+
+	<body class="um-vp bc-white " ontouchstart>
+
+		
+		<!--
+        	作者：694250639@qq.com
+        	时间：2016-11-01
+        	描述：输入登录信息
+        -->
+		<div class="ub ub-ver gRG_rg">
+			<div class="ub ub-ac rg1 uinput"><input id="Fphone" class="ub ub-f1 " type="text" placeholder="请输入手机号 " /></div>
+			<div class="ub ub-ac uinput rg2"><input id="Fpwd" class="ub ub-f1 " type="password" placeholder="请设置登录密码" /><img src="css/myImg/eye.png" /></div>
+			<div class="ub ub-ac ub-pj rg3"><input id="Frcord" class="ub ub-f1 " type="text" placeholder="请输入验证码" />
+				<div id="btncheck" class="ub ub-pe yzm"> 获取验证码</div>
+			</div>
+		</div>
+		<!--
+           	作者：694250639@qq.com
+           	时间：2016-11-01
+           	描述：邀请人手机号码 inviter——number
+           
+          -->
+
+		<div class="ub ub-ver inviter_num">
+			<div class="ub yqr" id="inviter_num"><img src="css/myImg/1.jpg">
+				<div class=" ub ub-ac ub-pc a">邀请人手机号码</div>
+			</div>
+			<div class="ub ub-f1 srk "><input id="hiddenDiv" type="text" placeholder="请输入邀请人手机号码" style="display: none;" /></div>
+		</div>
+		<!--
+        	作者：694250639@qq.com
+        	时间：2016-11-01
+        	描述：注册按钮
+        -->
+		<div class="ub ub-ver">
+			<div class="ub  gRgBtn registerbtn">
+				<div class="ub zc ub-f1 ub-ac ub-pc">注册</div>
+			</div>
+			<div class="ub ub-ac ub-pc gRgChoose">
+				<div class="checkbox umar-r">
+					<input id="agree" type="checkbox" checked="checked" name="radio" class="uabs ub-con">
+				</div>
+				<span>我已阅读并同意</span>
+				<div class="a">《注册服务协议》</div>
+			</div>
+		</div>
+		<!--
+        	作者：694250639@qq.com
+        	时间：2016-11-01
+        	描述：已有账号 立即登录
+        -->
+		<div class="ub ub-ac ub-pc">
+			<div class="ub gRgLogin"><span>已有账号?</span>
+				<div class="gRg_ljdl">立即登录</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../common/js/jquery-2.1.4.min.js"></script>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script src="../common/js/appcan.tab.js"></script>
+	<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	<script type="text/javascript" src="../common/js/jquery.md5.js"></script>
+
+	<script type="text/javascript">
+		var Fidentifier = "";
+		var msg = "";
+		var wait = 60;
+		var cantag = 0;
+		appcan.ready(function() {
+
+			})
+			/*计时器函数*/
+		function time(o) {
+			var tso = o;
+			if(wait == 0) {
+				o.innerHTML = "免费获取验证码";
+				wait = 60;
+				cantag = 0;
+				$(o).removeClass("disclick");
+			} else {
+				o.innerHTML = "重新发送(" + wait + ")";
+				wait--;
+				setTimeout(function() {
+					time(o)
+				}, 1000)
+			}
+		}
+		// 邀请人号码隐藏框
+		inviter_num.onclick = function showDiv() {
+				var div = document.getElementById("hiddenDiv");
+				if(div.style.display == "none") {
+					div.style.display = 'block';
+				} else {
+					div.style.display = 'none';
+				}
+			}
+			//立即登录跳转
+		appcan.button(".gRg_ljdl", "ani-act", function(a, b) {
+				appcan.window.open("login", "../login/login.html");
+				appcan.window.publish('login', '');
+			})
+			//注册
+		appcan.button(".registerbtn", "ani-act", function(a, b) {
+				if(!$("#agree").prop("checked")) {
+					appcan.window.openToast('请同意用户协议！', '1000');
+					return;
+				}
+				checkcode();
+			})
+			//注册按钮
+
+		appcan.button(".gRg_qrgBtn", "ani-act", function(a, b) {
+				appcan.window.open("qRegister", "../qRegister/qRegister.html");
+				appcan.window.publish('login', '');
+			})
+			//点击验证码
+		appcan.button("#btncheck", "ani-act", function() {
+				var Fphone = $("#Fphone").val();
+				var Fpwd = $("#Fpwd").val();
+				if(Fphone == "") {
+					appcan.window.openToast('手机号不能为空！', '1000');
+					return;
+				}
+				if(Fpwd == "") {
+					appcan.window.openToast('密码不能为空！', '1000');
+					return;
+				}
+				var o = this;
+				var parm = {
+					Fphone: $("#Fphone").val() //电话密码
+				};
+				appcan.ajax({
+					type: "POST",
+					dataType: 'json',
+					url:  "http://dzyryd2.shop0301.com/app/checkUser",
+					data: parm,
+					success: function(result) {
+						if(result.code == 1) {
+							appcan.window.openToast('该手机号已被注册！', '1000');
+							msg = result.Msg;
+							return;
+						} else {
+							var Fphone = $("#Fphone").val();
+							if(Fphone && /^1[3|4|5|8]\d{9}$/.test(Fphone)) {} else {
+								appcan.window.openToast("不是有效的手机号", 2000, 5);
+								return;
+							}
+							if(cantag == 0) {
+								sendcode();
+								$(this).addClass("disclick");
+								time(o);
+								cantag = 1;
+							};
+						}
+					},
+					error: function() {
+						appcan.window.openToast('服务器出错!', '1000');
+					}
+				});
+			})
+			/*获取验证码*/
+		function sendcode() {
+			var Fphone = $("#Fphone").val();
+			var parm = {
+					Fphone: Fphone
+				}
+				//电话
+			appcan.ajax({
+				url: "http://dzyryd2.shop0301.com/app/sendCode",
+				type: "POST",
+				data: parm,
+				dataType: 'json',
+				success: function(result) {
+					if(result.code == 1) {
+						appcan.window.openToast('验证码发送成功！', '1000', 5);
+						Fidentifier = result.msg;
+					}
+				},
+				error: function(e) {
+					appcan.window.openToast('服务器出错!', '1000', 5);
+				}
+			});
+		}
+
+		function checkcode() {
+			var Frand_code = $("#Frcord").val();
+			if(Frand_code == "") {
+				appcan.window.openToast('验证码不能为空！', '1000', 5);
+				return;
+			}
+			appcan.ajax({
+				url:  "http://dzyryd2.shop0301.com/app/checkcode",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					Frand_code: Frand_code,
+					Fidentifier: Fidentifier,
+					phone: $("#Fphone").val(),
+					pwd: $.md5($("#Fpwd").val()).toUpperCase()
+				},
+				success: function(result) {
+					if(result.code == 1) {
+						appcan.window.openToast('注册成功!', '1000', 5);
+						appcan.window.open("login", "../login/login.html");
+
+					} else {
+						appcan.window.openToast('验证码错误!', '1000', 5);
+					}
+				},
+				error: function(e) {
+					appcan.window.openToast('服务器出错!', '1000', 5);
+				}
+			});
+		}
+	</script>
+
+</html>

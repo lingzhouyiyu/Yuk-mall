@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver sc_1">
+			<div class="ub ub-ac ub-pj sfyz bc-text ">
+				<div class="ub ub-ac  ">
+					<div class="ub ub-ac umar-l">登录名</div>
+				</div>
+				<div class="ub ub-ac fh">
+					<div class="ub  account_right color_c2 Floginname">
+
+					</div>
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pj sjyz bc-text bdsj">
+				<div class="ub ub-ac word">
+					<div class="ub ub-ac umar-l">绑定手机</div>
+				</div>
+				<div class="ub ub-ac fh">
+					<div class="ub R account_right color_c2 Fphone">
+						<span class="Fphone"></span>
+						<div class="ub R account_right umar-l">
+							<img src="../common/images/icon_grayR.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pj yhk bc-text smrz rzclick" >
+				<div class="ub ub-ac word">
+					<div class="ub ub-ac umar-l">实名认证</div>
+				</div>
+				<div class="ub  ub-ac fh ">
+					<span class="color_c2 hasrz">已认证</span>
+					<div class="ub R account_right">
+						<img src="../common/images/icon_grayR.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-ver sc_2 ">
+			<div class="ub ub-ac ub-pj dlmm bc-text dlmm changepwd">
+				<div class="ub ub-ac word">
+					<div class="ub ub-ac umar-l">修改登录密码</div>
+				</div>
+				<div class="ub ub-ac fh">
+					<div class="ub R account_right">
+						<img src="../common/images/icon_grayR.png" />
+					</div>
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pj jymm bc-text changejymm">
+				<div class="ub ub-ac word">
+					<div class="ub ub-ac umar-l">修改支付密码</div>
+				</div>
+				<div class="ub ub-ac fh">
+					<div class="ub R account_right">
+						<img src="../common/images/icon_grayR.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../common/js/jquery-2.1.4.min.js"></script>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+
+	</body>
+	<script>
+		appcan.ready(function() {
+				$(".Fphone").text(Fsuper.getuserinfo().Fphone);
+				$(".Floginname").text(Fsuper.getuserinfo().Fphone);
+				if(Fsuper.getuserinfo().Fidcard != "" && Fsuper.getuserinfo().Fidcard != undefined) {
+					$(".hasrz").text("已认证");
+					//$(".rzclick").unbind();
+					//$(".rzclick").attr("onclick", "smrz()");
+
+				} else {
+					$(".hasrz").text("未认证");
+					$(".rzclick").attr("onclick", "smrz()");
+				}
+			})
+			//打开绑定手机
+		appcan.button(".bdsj", "ani-act", function(a, b) {
+
+				appcan.window.open("change", "../change/change.html");
+				//              appcan.window.publish('move', '1');
+			})
+			//打开实名认证
+		function smrz() {
+			appcan.window.open("identfy", "../safe/identfy/identfy.html");
+		}
+
+		//打开修改登录密码
+		appcan.button(".changepwd", "ani-act", function(a, b) {
+				appcan.window.open("changpwd", "../safe/changpwd/changpwd.html");
+			})
+			//打开修改支付密码
+		appcan.button(".changejymm", "ani-act", function(a, b) {
+			appcan.window.open("changjym", "../safe/changjym/changjym.html");
+		})
+	</script>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="xieyi/css/main.css" />
+	</head>
+
+	<body class="um-vp ">
+		<div class="ub redtop">
+			<div class="ub ub-f1 topbg"></div>
+		</div>
+		<div class="ub ub-ac ub-pc ub-ver centerbg">
+			<img class=" headimg" src="xieyi/css/images/setting2.png" />
+		</div>
+		<div class="ub ub-ac ub-pc redtitle">
+			来云游乘车红包
+		</div>
+		<div class="ub ub-ac ub-pc ">
+			<span>余额</span>
+			<span class="btitle">0.0</span>
+			元
+		</div>
+		<div class="ub ub-f1 ub-pe redmoney cole96">
+			<span>红包有效期至：</span>
+			<span>2017-9-30</span><span>日</span>
+		</div>
+<!--领取明细-->
+<div class="ub ub-f1 syline"></div>
+		<div class="ub ub-ac ub-f1 ub-pc lqmxben" id="getenve" rel="up">
+			<div class="ub ub-ac ub-pc">领取明细</div>
+			<img class="ub ub-ac umar-l moreup imgwith" src="xieyi/css/images/more.png" />
+			<img class="ub ub-ac umar-l moredown dhide imgwith" src="xieyi/css/images/more_up.png" />
+		</div>
+		<div class="getredlist ub ub-ver dhide" id="getenvelist" >
+			<div class="ub getitem">
+				<div class="ub ub-ver ub-f1 getleft">
+					<div class="ub umar-b">来云游乘车红包</div>
+					<div class="ub cole96">2017-9-30 14:00</div>
+				</div>
+				<div class="ub ub-ac  getright font125">
+					<span>+</span>
+					<span class="font125">5</span>
+				</div>
+			</div>
+		</div>
+		<!--使用明细-->
+		<div class="ub ub-f1 syline"></div>
+		<div class="ub ub-ac ub-f1 ub-pc symxben" id="useenve" rel="up">
+			<div class="ub ub-ac ub-pc">使用明细</div>
+			<img class="ub ub-ac umar-l moreup imgwith" src="xieyi/css/images/more.png" />
+			<img class="ub ub-ac umar-l moredown dhide imgwith" src="xieyi/css/images/more_up.png" />
+		</div>
+		<div class="getredlist ub ub-ver dhide" id="useenvelist">
+			<div class="ub getitem">
+				<div class="ub ub-ver ub-f1 getleft">
+					<div class="ub umar-b">来云游购买车票</div>
+					<div class="ub cole96">2017-9-30 14:00</div>
+				</div>
+				<div class="ub ub-ac  getright font125">
+					<span>-</span>
+					<span class="font125">5</span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script src="../common/js/jquery-2.1.4.min.js"></script>
+	</body>
+	<script>
+		$("#getenve").click(function(){
+			var rel = $(this).attr("rel");
+			var moreup =  $(this).find(".moreup");
+			var moredown = $(this).find(".moredown");
+			if(rel == "up"){
+				$(moreup).addClass("dhide");
+				$(moredown).removeClass("dhide");
+				$("#getenvelist").removeClass("dhide");
+				$(this).attr("rel","down")
+			}else if(rel == "down"){
+				$(moreup).removeClass("dhide");
+				$(moredown).addClass("dhide");
+				$("#getenvelist").addClass("dhide");
+				$(this).attr("rel","up")
+			}
+		});
+		$("#useenve").click(function(){
+			var rel = $(this).attr("rel");
+			var moreup =  $(this).find(".moreup");
+			var moredown = $(this).find(".moredown");
+			if(rel == "up"){
+				$(moreup).addClass("dhide");
+				$(moredown).removeClass("dhide");
+				$("#useenvelist").removeClass("dhide");
+				$(this).attr("rel","down")
+			}else if(rel == "down"){
+				$(moreup).removeClass("dhide");
+				$(moredown).addClass("dhide");
+				$("#useenvelist").addClass("dhide");
+				$(this).attr("rel","up")
+			}
+		});
+	</script>
+
+</html>

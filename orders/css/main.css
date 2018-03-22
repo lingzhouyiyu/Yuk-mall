@@ -1,0 +1,31 @@
+.head_border{ border: 1px solid #a4046b; border-radius: 0.4em; background: #fff; height: 2em; color:#a4046b ;}
+.head_active{ background: #a4046b;  color: #fff;}
+.dfk_list{padding-top: 0.6em; }
+.dfk_item{ background: #fff; margin-bottom: 0.6em;}
+.dfk_top{ padding: 0.6em; border-bottom: 1px solid #E1E1E1;}
+ .font08{ font-size: 0.8em;}
+ .font09{ font-size: 0.9em;}
+.record_sign img{ width: 1em;}
+.small_item{ padding: 0.6em; background: #fff; border-bottom: 1px solid #E1E1E1;}
+.small_botom{ padding: 0.6em; border-bottom: 1px dashed #E1E1E1;}
+.small_btns{ padding: 0.6em;}
+.btn_qx{ height: 2em; border-radius: 8px; border: 1px solid #797979; color: #646464; width: 5.5em; margin-right: 1em;}
+.btn_zf{ height: 2em; border-radius: 8px; border: 1px solid #a4046b; color: #a4046b; width: 5.5em;}
+.left_img img{ width: 2.5em; height: 2.5em; margin-right: 0.5em;}
+.btn_qx02{ margin-right: 0;}
+.xforeders_list{ padding-top: 0.6em;}
+.xfbig_item{ background: #fff;margin-bottom: 0.6em;}
+.xforders_top{ padding: 1em 0.6em; border-bottom: 1px solid #E1E1E1;}
+.shop_infor{ padding: 0.6em; border-bottom: 1px solid #E1E1E1;}
+.shopinfor_left img{ width: 2em; height: 2em; border-radius: 0.4em;}
+.common_item{ padding:0.6em 0.6em 0 0.6em;}
+.common_item02{ padding: 1em 0.6em; border-top: 1px solid #E1E1E1; margin-top: 0.6em;}
+.shenhe_left{ padding-left: 0.6em;}
+.shenhe_left img{ width: 4em;}
+.shenhe_item{ background: #fff; }
+.shehe_right{ margin-left: 0.6em; padding-right: 0.6em;}
+.shenhe_item02{ padding-top: 5px; font-size: 0.9em;}
+.botom_item{ margin-top: 0.4em;}
+.shehe_botom{ margin-top: 0.6em; padding-top: 0.4em; border-top: 1px solid #E1E1E1;border-bottom: 1px solid #E1E1E1; padding-bottom: 0.6em; padding-left: 0.6em; padding-right: 0.6em;}
+.dfk_top02{ margin-bottom: 0.6em;}
+.botom_status{ padding: 0.8em 0.6em;}

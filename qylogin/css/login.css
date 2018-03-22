@@ -1,0 +1,83 @@
+
+.login_bg {
+	background:#f0f0f0;
+	
+}
+
+.loginLogo{
+	padding: 0em  0 0 0;
+	padding-top: 3em;
+}
+.loginLogo img{
+	width:6em;
+	
+;
+
+
+}
+.loginLogo span{
+	display: block;
+	font-size: 0.9em;
+	color:#a9a0be;
+	padding: 0.5em 0;
+}
+.loginInput{
+	margin-top: 3em;
+}
+.loginInput .input1 input{
+	font-size: 1em;
+	color:#a9a0be;
+	background-color:transparent;
+	border: none;
+	padding: 0.3em 0;
+	margin: 0.5em 0;
+	border-bottom: 1px solid #aba2bf;
+}
+.loginInput .input2 input{
+	font-size: 1em;
+	color:#a9a0be;
+	background-color:transparent;
+	border: none;
+	padding: 0.3em 0;
+	margin: 0.5em 0;
+	border-bottom: 1px solid #aba2bf;
+	background: url("../../login/css/myImg/eye.jpg")  no-repeat right center ;
+	
+}
+
+.loginBtn .loginBtn_1{
+	
+	background: #a4046b;
+	height: 2.8em; color: #fff; margin-top: 3em;
+	border-radius: 8px; margin-right: 2em; margin-left: 2em; margin-bottom: 2em;
+}
+.add{font-size:0.8em ;margin-left: 2em;color: #a4046b;}
+
+.login_fpd .fpd{
+	text-decoration: none;
+	font-size: 0.8em;
+	color: #9589b1;
+	padding-bottom: 3em;
+	margin-right: 2em;
+}
+.rg{
+	display: block;
+	padding: 2em 0;
+	text-align: center;
+}
+.rg span{
+	font-size: 1em;
+	color: #9589b1;
+	text-decoration: none;
+}
+.rg .loginMfzz{
+	
+	font-size: 1em;
+	text-decoration: none;
+	color: #a4046b;
+}
+
+.input_name{ margin-top: 2em; margin-left: 2em; margin-right: 2em;  border-bottom: 1px solid #aba2bf; }
+.input_name input{ height: 2.5em; border: 0 none; background-color:transparent;}
+.input_pwd{ margin-top: 1em; }
+.close_btn{ position: absolute; left: 1em; top: 1em; z-index: 99; width: 1.5em;}

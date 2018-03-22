@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<!--
+       	1 身份验证 设置交易密码 绑定银行卡
+       -->
+		<div class="prove_top">
+			<img src="../css/myImg/prove02.jpg">
+		</div>
+		<div class="ub ub-ver ub--ac ub-pc a_1">
+			<div class="ub ub-pc ub-ac word">
+				<div class="ub ub-f1 ub-pc ub-ac sfyz">身份证验证</div>
+				<div class="ub ub-f1 ub-pc ub-ac szjymm">设置交易密码</div>
+				<div class="ub ub-f1 ub-pc ub-ac bdyhk">绑定银行卡</div>
+			</div>
+		</div>
+		<!-- 2验证信息-->
+		<div class="ub ub-ver a_2">
+			<div class="ub xm ">
+				<div class="ub ub-ac word">支付密码</div>
+				<div class="ub ub-f1 uinput "><input type="password" class="newFpwd" placeholder="请输入密码" /></div>
+			</div>
+			<div class="ub sfz">
+				<div class="ub ub-ac word">确认密码</div>
+				<div class="ub ub-f1 uinput "><input class="shareFpwd" type="password" placeholder="请再次输入密码" /></div>
+			</div>
+		</div>
+
+		<!--
+        	3 申请验证：
+        -->
+		<div class="ub a_3 prove_btn02">
+			<div class="ub ub-pc ub-ac ub-f1 sqyz">确认提交</div>
+		</div>
+
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../../common/js/jquery.1.10.2.js"></script>
+	</body>
+	<script>
+		//打开下一步
+		appcan.button(".prove_btn02", "ani-act", function(a, b) {
+
+			appcan.window.open("prove3", "../prove3/prove3.html");
+			//              appcan.window.publish('move', '1');
+		})
+	</script>
+
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc_white" ontouchstart>
+		<!--宜众便利自营-->
+		<div class="ub ub-ver ub-pc ub-f1">
+			<div class="ub ub-f1 bc-text bt Fsjname"></div>
+			<div class="ub ub-f1 hs"><span>订单号：</span><span class="FczorderNum"></span></div>
+			<div class="ub ub-f1 ">
+				<div class="ub ub-f1 ub-fh hs"><span>消费金额：￥</span><span class="Fmoney">0</span></div>
+			</div>
+
+			<!--花纹边框-->
+			<div class="ub bk"></div>
+		</div>
+		<!--余额
+			
+		-->
+		</div>
+		<!--已开通-->
+		<!--支付宝支付-->
+		<div class="ub ub-ac  ub-f1 bd_2  choose">
+			<div class="ub ub-img  zf_img"><img src="../czpay/css/myImg/4.png" /></div>
+			<div class="ub ub-ver ub-f1 m">
+				<div class="ub zf"><span>支付宝支付</span></div>
+				<div class="ub hs">欢迎使用支付宝支付</div>
+			</div>
+			<div class="ub ">
+				<div class="ub ub-ac   dbcheck ">
+					<div class="ub allcheck check_radio"></div>
+					<img class="check_ok ub-img uhide" href="1" src="../common/images/ok.png" />
+				</div>
+			</div>
+		</div>
+		<!--微信支付 -->
+		<div class="ub ub-ac  ub-f1 bd_2 choose ">
+			<div class="ub ub-img  zf_img"><img src="../czpay/css/myImg/5.png" /></div>
+
+			<div class="ub ub-ver ub-f1 m">
+				<div class="ub zf"><span>微信支付</span></div>
+				<div class="ub hs">推荐安装微信5.0以上版本的用户使用</div>
+			</div>
+			<div class="ub ">
+				<div class="ub ub-ac   dbcheck ">
+					<div class="ub allcheck check_radio"></div>
+					<img class="check_ok ub-img uhide" href="2" src="../common/images/ok.png" />
+				</div>
+			</div>
+
+		</div>
+		<!--银行卡支付 -->
+		<div class="ub ub-ac  ub-f1 bd_1 choose">
+			<div class="ub ub-img  zf_img"><img src="../czpay/css/myImg/6.png" /></div>
+			<div class="ub ub-ver ub-f1 m">
+				<div class="ub zf"><span>银行卡支付支付</span></div>
+				<div class="ub hs">安全急速支付，无需开通网银</div>
+			</div>
+			<div class="ub ">
+				<div class="ub ub-ac   dbcheck ">
+					<div class="ub allcheck check_radio"></div>
+					<img class="check_ok ub-img uhide" href="3" src="../common/images/ok.png" />
+				</div>
+			</div>
+		</div>
+
+		<!--确认支付-->
+		<div class="ub ub-ac ub-pc qrzf">
+			<div class="ub ub-ac ub-pc ub-f1 qrzf_btn">确认支付</div>
+		</div>
+		<!--交易密码弹窗-->
+		<div class="tranpwd uhide">
+			<div class="ub ub-ver tranpwd_main">
+				<div class="ub ub-f1 ub-ac tranpwd_top bc-text">
+					<div class="ub ub-ac  ub-pc ub-f1">交易密码</div>
+				</div>
+				<div class="ub ub-ac ub-pc tranpwd_center">
+					<div class="ub ub-f1 uinput tranpwd_input umar-r">
+						<input class="ub ub-f1 FCzmm" type="password" />
+					</div>
+					<div class="ub  colorred">
+						*
+					</div>
+				</div>
+				<div class="ub ub-ac ub-pc ub-f1 btn_box">
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh out_btn">
+						取消
+					</div>
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh sure_btn" onclick="getorderoutjeall()">
+						确认
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../common/js/jquery-2.1.4.min.js"></script>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script src="../common/js/appcan.tab.js"></script>
+	<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	<script type="text/javascript" src="../common/js/jquery.md5.js"></script>
+	<script type="text/javascript" src="../common/js/Safe.js"></script>
+	<script type="text/javascript" src="../common/js/des.js"></script>
+
+	</script>
+	<script>
+		var Fpayway = "";
+		appcan.ready(function() {
+			uexUnionPay.cbStartPay = unionpayover;//银联
+			$(".Fmoney").text(appcan.locStorage.getVal("FCzJe"));
+			$(".FczorderNum").text(appcan.locStorage.getVal("FczorderNum"));
+		})
+		appcan.button(".choose", "ani-act", function(a, b) {
+				$(".choose").find(".check_radio").removeClass("uhide");
+				$(".choose").find(".check_ok").addClass("uhide");
+				$(this).find(".check_radio").addClass("uhide");
+				$(this).find(".check_ok").removeClass("uhide");
+				Fpayway = $(this).find(".check_ok").attr("href");
+			})
+			//利息前置支付
+		appcan.button(".lxqzzf", "ani-act", function(a, b) {
+
+				appcan.window.open("loginMfzz", "../interest/interest.html");
+				appcan.window.publish('loginMfzz', '');
+			})
+			//授信额度支付
+		appcan.button(".sure_btn", "ani-act", function(a, b) {
+			$(".tranpwd").removeClass("uhide");
+		})
+
+		//弹出输入密码
+		appcan.button(".qrzf_btn", "ani-act", function(a, b) {
+				if(Fpayway == "") {
+					appcan.window.openToast('请选择支付方式', '2000');
+					return;
+				}
+				var parm = {
+					Fuserid: Fsuper.getuserid(),
+					ForderNum: appcan.locStorage.getVal("FczorderNum"),
+					Fpayway: Fpayway
+				};
+				appcan.ajax({
+					url: Serverurl + "/ygylapp/upMethod",
+					type: "POST",
+					dataType: "json",
+					data: parm,
+					success: function(result) {
+						var code = result.code;
+						var msg = result.msg;
+						var debug = result.debug;
+						if(code < 10000) {
+							if(code == 0) { //返回成功
+								var Fje = appcan.locStorage.getVal("FCzJe");
+								var Fnum = appcan.locStorage.getVal("FczorderNum");
+								if(Fpayway == "1") { //支付宝
+
+								}
+								if(Fpayway == "2") { //微信
+
+								}
+								if(Fpayway == "3") { //银联
+									
+									UnionPay(0.01, Fnum);
+									//									if(Fje != "" && Fnum != "") {
+									//										UnionPay(0.01, Fnum);
+									//									}
+								}
+							}
+						} else {
+							if(Fsuperdbg) {
+								alert(result.code);
+								alert(result.msg);
+								alert(result.debug);
+							}
+						}
+					}
+				});
+
+			})
+			//银联
+		function UnionPay(fee, num) {
+			var parm = {
+				txnAmt: fee,
+				ForderNum: num
+			}
+			Safe.post("/ygylapp/orderunionpay", parm, function(result) {
+				var tx = result.data;
+				//银联订单号
+				var code = result.code;
+				if(code == 0) {
+					var params = {
+						orderInfo: tx,
+						mode: "00"
+					};
+					var data_union = JSON.stringify(params);
+					uexUnionPay.startPay(data_union);
+				}
+			});
+		}
+		//银联支付
+		function unionpayover(data) {
+			var json = JSON.parse(data);
+			if(json.payResult == 0) {
+				alert("成功");
+				//appcan.locStorage.setVal("ordersindex", 2);
+				//appcan.window.publish('quicksess', '');
+				//appcan.window.publish('movetosuccess', ''); //发送到orders.html和orders-content.html
+				//appcan.window.open("orders", "../orders/orders.html");
+			}
+		}
+	</script>
+
+</html>

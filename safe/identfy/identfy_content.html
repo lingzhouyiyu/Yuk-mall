@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver indetfy_box bc-text">
+			<div class="ub ub-f1 indety_item">
+				<div class="ub ub-ac umar-r">
+					姓名
+				</div>
+				<div class="ub ub-f1 uinput identfy_input">
+					<input class="Fname" type="text" placeholder="真实姓名" />
+				</div>
+			</div>
+			<div class="ub ub-f1 indety_item">
+				<div class="ub ub-ac umar-r">
+					身份证号
+				</div>
+				<div class="ub ub-f1 uinput identfy_input">
+					<input type="text" class="Fidcard" placeholder="15至18位身份证号码" />
+				</div>
+			</div>
+			<div class="ub indetfy_botom">
+				实名认证成功后不可修改，请谨慎操作
+			</div>
+			<div class="ub indentfy_btn" onclick="upuser()">
+				<div class="ub ub-f1 ub-ac ub-pc sure_btn">
+					实名认证
+				</div>
+			</div>
+		</div>
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+	</body>
+	<script>
+		function upuser() {
+			var Fname = $(".Fname").val();
+			var Fidcard = $(".Fidcard").val();
+			if(Fname == "") {
+				appcan.window.openToast('姓名不能为空！', '2000');
+				return;
+			}
+			if(Fidcard == "") {
+				appcan.window.openToast('身份证不能为空！', '2000');
+				return;
+			}
+			if(Fidcard.length < 15) {
+				appcan.window.openToast('身份证号码位数不合法！', '2000');
+				return;
+			}
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				Fname: Fname,
+				Fidcard: Fidcard,
+			}
+			appcan.ajax({
+				url: Serverurl + '/ygylapp/updateUserName',
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							appcan.window.publish('changename', '');
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+	</script>
+
+</html>

@@ -1,0 +1,57 @@
+.account_right img{ width: 0.6em;}
+.sc_1{
+	
+	padding-top: 0.6em;
+	
+}
+.sc_1 .sfyz{
+	padding: 1em ;
+	border-bottom:1px solid #efefed; background: #fff;
+}
+.sc_1 .sjyz{
+	background: #fff;
+	padding: 1em ;
+	border-bottom:1px solid #efefed;
+}
+.sc_1 .yhk{
+	padding: 1em;
+	background: #fff;
+	
+}
+.sc_1 .yhk span{
+	color: #808080;
+	padding-right: 0.5em;
+}
+.sc_1 .fh{
+	
+}
+.sc_2{
+	background: #fff;
+	margin-top: 0.6em;
+	padding: 0 1em;
+}
+.sc_2 .dlmm{
+	padding: 1em 0;
+	border-bottom:1px solid #efefed;
+}
+.sc_2 .jymm{
+		padding: 1em 0;
+	border-bottom:1px solid #efefed;
+}
+.sc_2 .rz{
+		padding: 1em 0;
+	border-bottom:1px solid #efefed;
+}
+.sc_2 span{
+	padding-right: 0.5em;
+}
+.sc_2 .fh{
+	color: #c2c2c2;
+}
+.color_c2{ color: #c2c2c2;}
+.indetfy_box{ padding-top: 0.6em;}
+.indety_item{}
+.indety_item{ background: #fff; padding: 0.6em; margin-bottom: 0.6em;}
+.indetfy_botom{ font-size: 0.8em; color: #585c64; padding: 0 0.6em 0.6em 0.6em;}
+.indentfy_btn{ padding: 2em 1em;}
+.sure_btn{ background: #a4046b; height: 2.8em; color: #fff; border-radius: 0.4em;}

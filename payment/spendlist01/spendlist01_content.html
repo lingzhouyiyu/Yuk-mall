@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver spend_list">
+
+		</div>
+		<div class="myxftemp uhide">
+			<div class="ub ub-ver spend_item xfitems">
+				<div class="ub ub-f1 ub-pj top choose">
+					<div class="ub ub-ac ">
+						<div class="ub umar-l bc-text">
+							<span class="Ftype"></span><span class="FMingC"></span>
+						</div>
+					</div>
+
+					<div class="ub ub-ac m_num">
+						<span class="sy">
+							剩余￥
+						</span>
+						<span class="Fye">
+							0.00
+						</span>
+					</div>
+				</div>
+				<div class="ub ub-ver ub-pc ub-f1 content ">
+					<div class="ub ub-pc ">
+						<div class="ub ub-fh ub-ac ub-f1 ">
+							<span class="hs">投资金额</span>
+							<span class="Fmoney"></span>
+						</div>
+						<div class="ub ub-f1 ub-fh ub-ac ">
+							<span class="color96 umar-r">投资时间</span>
+							<span class="FdownTime"></span>
+						</div>
+					</div>
+					<div class="ub ">
+						<div class="ub ub-fh ub-ac ub-f1 ">
+							<span class="hs">年化利率</span>
+							<span class="FLiX_prepose">0</span>
+							<span>%</span>
+						</div>
+						<div class="ub ub-f1 ub-ac ub-fh">
+							<span class="hs">前置额度</span>
+							<span class="zs FqzLix">0.00</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../common/js/appcan.js"></script>
+	<script src="../../common/js/appcan.control.js"></script>
+	<script src="../../common/js/appcan.tab.js"></script>
+	<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+	<script>
+		var Fstart = 0;
+		var pageSize = 10;
+		appcan.ready(function() {
+			getdqkymx();
+			appcan.window.subscribe('changeid', function(msg) {
+				$(".mask").removeClass("uhide");
+			});
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					Fstart = 0;
+					$(".spend_list").empty();
+					getdqkymx();
+				} else if(type == 1) {
+					getdqkymx();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+
+		});
+		//消费查询
+		function getdqkymx() {
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				pageSize: pageSize,
+				Fstart: Fstart,
+			};
+			Fsuper.getdata('/ygylapp/getdqkymx', parm, addorder, function() {});
+		}
+
+		function addorder(row, end) {
+			var list = $(".spend_list");
+			var item = $(".myxftemp").clone();
+			var domitem = item.find(".xfitems");
+			domitem.attr("id", row.Forderid);
+			domitem.find(".Fye").text(row.Fye);
+			domitem.find(".Fmoney").text(row.Fmoney);
+			domitem.find(".FdownTime").text(row.FdownTime);
+			domitem.find(".FLiX_prepose").text(row.FLiX_prepose);
+			domitem.find(".FqzLix").text(row.FqzLix);
+			domitem.find(".FMingC").text(row.FMingC);
+			if(row.FType == "0") {
+				domitem.find(".Ftype").text("【新手标】");
+			}
+			if(row.FType == "1") {
+				domitem.find(".Ftype").text("【随投随赎】");
+			}
+			if(row.FType == "2") {
+				domitem.find(".Ftype").text("【随投定赎】");
+			}
+			if(row.FType == "3") {
+				domitem.find(".Ftype").text("【0元购】");
+			}
+			if(row.FType == "4") {
+				domitem.find(".Ftype").text("【薪计划】");
+			}
+			domitem.attr("onclick", "myspaend(" + row.Fid + ",this)");
+			list.append(domitem);
+			Fstart = end;
+		}
+		function myspaend(Fid,dom){
+			appcan.locStorage.setVal("Fqzid", Fid);
+			appcan.window.open("myspaend", "../../myspaend/myspend01/myspend01.html");
+		}
+	</script>
+
+</html>

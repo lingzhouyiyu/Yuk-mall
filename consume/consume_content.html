@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<!--头部图片-->
+		<div class="consume_banner">
+			<img class="Fimg" src="" />
+		</div>
+		<!--店铺信息-->
+		<div class="ub ub-ver conm_infor">
+			<div class="ub bc-text paddingl6 paddingr6 FsjMc">
+
+			</div>
+			<div class="ub umar-t ub-ac umar-b paddingl6 paddingr6">
+				<span class="lscolor">￥</span>
+				<span class="lscolor Frenjunxf">0.00</span>
+				<span class="color96">/</span>
+				<span class="color96">人均消费</span>
+			</div>
+			<div class="ub ub-ver conm_botm paddingl6 paddingr6 color96">
+				<div class="ub umar-b ">
+					<span>地址：</span>
+					<span class="Fsjaddress"></span>
+				</div>
+				<div class="ub umar-b ">
+					<span>电话：</span>
+					<span class="Fphone"></span>
+				</div>
+			</div>
+		</div>
+		<!--商家详情-->
+		<div class="ub ub-ac sj_infor bc-text">
+			<div class="ub ub-ac ub-f1">
+				<span>商家详情</span>
+				<span class="ub ub-ac umar-l">
+					<img class="ub ub-img" style="width: 1.2em;" class="ub-img" src="../common/images/consume01.png" />
+				</span>
+			</div>
+			<div class="ub ub-ac">
+				<div class="ub color96">
+					更多图文详情
+				</div>
+				<div class="ub ub-ac umar-l">
+					<img class="ub ub-img" style="width: 0.7em;" src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+		</div>
+		<!--加入会员-->
+		<div class="ub join bc-text">
+			<div class="ub ub-ac ub-f1 paddingl6">
+				<div class="ub vip_sign">VIP</div>
+				<div class="ub ub ub-f1 txthide">
+					<span>会员享</span>
+					<span class="Fdiscount">0</span>
+					<span>折优惠</span>
+				</div>
+			</div>
+			<div class="ub ub-ac paddingr6">
+				<div class="ub gojoin ub-ac ub-pc ">
+					加入会员
+				</div>
+				
+			</div>
+		</div>
+		<div class="ub ub-ac coupon gocoupon">
+			<div class="ub ub-f1 sure_left">
+				<div class="ub">
+					优惠券
+				</div>
+				<div class="coup_sign">
+					<span>0</span>
+					<span>张可使用</span>
+				</div>
+			</div>
+			<div class="ub sure_right">
+				<span class="ub bc-text umar-r">-</span>
+				<span class="ub bc-text umar-r">￥</span>
+				<span class="ub bc-text umar-r">0.00</span>
+				<img class="ub ub-img" style="width: 0.7em;" src="../common/images/icon_grayR.png" />
+			</div>
+		</div>
+		<div class="ub ub-ver consume consume02">
+			<div class="ub ub-ac">
+				<div class="ub bc-text">
+					消费金额：
+				</div>
+				<div class="ub ub-f1 uinput conm_input">
+					<input class="Fmoney" type="text" placeholder="输入本次消费金额" />
+				</div>
+			</div>
+			<div class="ub ub-ac way_choose">
+				<div class="ub bc-text">
+					支付方式：
+				</div>
+				<div class="ub ub-ac ub-pc pay_way">
+					<span>在线支付</span>
+					<img src="../common/images/ok_02.png" />
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-ac ub-pc agree">
+			<div class="checkbox umar-r">
+				<input id="agree" type="checkbox" checked="checked" name="radio" class="uabs ub-con">
+			</div>
+			<div class="text1 bc-text">
+				同意
+			</div>
+			<div class="text2 lscolor">
+				《宜众便利消费协议》
+			</div>
+		</div>
+		<div class="ub consume_btn" onclick="ShopOrder()">
+			<div class="ub ub-ac ub-pc ub-f1 main_btn">
+				立即支付消费
+			</div>
+		</div>
+		<script type="text/javascript" src="../common/js/jquery.1.10.2.js"></script>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+		
+	</body>
+	<script>
+		var Fshopid = appcan.locStorage.getVal("Fshopid")
+		appcan.ready(function() {
+				getShopInfoByid();
+			})
+			//打开商家图文详情
+		appcan.button(".sj_infor", "ani-act", function(a, b) {
+
+				appcan.window.open("businessDetails", "../businessDetails/businessDetails.html");
+			})
+			//打开
+		appcan.button(".gocoupon", "ani-act", function(a, b) {
+
+			appcan.window.open("coupon", "../coupon/usecopon/usecopon.html");
+		})
+		
+			//查询商家信息
+		function getShopInfoByid() {
+			var parm = {
+				Fshopid: appcan.locStorage.getVal("Fshopid")
+			};
+			appcan.ajax({
+				url: Serverurl + "/YgylApp/getShopInfoByid",
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var rows = result.data[0];
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							var strs = new Array();
+							strs = rows.Fimg.split(",");
+							$(".Fphone").text(rows.Fphone);
+							$(".FsjMc").text(rows.FsjMc);
+							$(".Fsjaddress").text(rows.Fsjaddress);
+							$(".Fimg").attr("src", Serverurl + "/" + strs[0]);
+							$(".Fdes").text(rows.Fdes);
+							$(".Fdiscount").text(rows.Fdiscount);
+							$(".Frenjunxf").text(rows.Frenjunxf);
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		function ShopOrder() {
+		    if(Fsuper.checkUserLogin() == 0) {
+                    return;
+                }
+			var Fmoney =Number($(".Fmoney").val());
+			if(Fmoney == 0){
+				appcan.window.openToast('请输入消费金额!', '2000');
+				return;
+			}
+			var parm = {
+				Fuserid:Fsuper.getuserid(),
+				Fshopid: appcan.locStorage.getVal("Fshopid"),
+				Fmoney:$(".Fmoney").val(),
+				FpayMfethod:"0",
+				Fname:$(".FsjMc").text()
+			};
+			appcan.ajax({
+				url: Serverurl + "/YgylApp/ShopOrder",
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							appcan.locStorage.setVal("FXforderId", result.ID);
+							appcan.locStorage.setVal("FseleId", "xf");
+							appcan.window.open("payment", "../payment/paymentDown/payment.html");
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+	</script>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+		<style>
+			.sc-text-tab {
+				color: #323232 !important;
+			}
+			
+			.sc-text-active {
+				color: #a4046b !important;
+			}
+		</style>
+	</head>
+
+	<body class="um-vp " ontouchstart>
+		<div id="page_0" class="up ub ub-ver" tabindex="0">
+			<div class="ub ub-pc ub-ac ico_padding">
+
+			</div>
+			<!--</div>-->
+			<!--header开始-->
+			<div id="head" class="uh ub-ac bc-text-head ub bc-head">
+				<div class="nav-btn" id="nav-left">
+					<div class="fa fa-angle-left fa-2x"></div>
+				</div>
+				<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">商品</h1>
+				<div class="nav-btn nav-bt" id="nav-right">
+				</div>
+			</div>
+			<!--header结束-->
+			<div id="header" class="bg ulev1 ub-ac ub-pc" style="background: #fff"></div>
+			<!--header结束-->
+			<!--content开始-->
+			<div id="content" class="ub-f1 tx-l t-bla c-wh">
+
+			</div>
+			<!--content结束-->
+			<div id="footer" class="uf t-bla ub sc-bg-active  sc-border-tab ">
+				<div class="ub ub-f1 tab" id="footer1">
+
+				</div>
+
+			</div>
+			<div id="footer" class="uf bc-text-head ub ubt bc-border">
+				<div class="ub ub-ac ub-pc " style=" height: 3.3em;width: 100%;">
+					<div class="ub ub-ac ub-f1" style="background: #fff">
+						<div class="ub-f1 ub" style=" height: 3.3em">
+							<div class="ub ub-ac ub-f1" style="background: #fff">
+								<div class="ub ub-ac ub-pc ub-ver ub-f1 right_collect">
+									<div class="ub">
+										<img style="width: 1.5em;" src="../common/images/collect_black.png" />
+									</div>
+									<div class="ub sc-text" style="font-size: 0.9em">
+										收藏
+									</div>
+								</div>
+
+							</div>
+							<div class="ub ub-ac ub-f1" style="background: #fff">
+								<div class="ub ub-ac ub-ver ub-pc ub-f1 goshopCar">
+									<div class="ub">
+										<div class="ub">
+											<img style="width: 1.5em;" src="../common/images/shop_blck.png" />
+										</div>
+										<div class="ub ub-ac ub-pc car_sign carcount"></div>
+									</div>
+									<div class="ub sc-text" style="font-size: 0.9em">
+										购物车
+									</div>
+
+								</div>
+
+							</div>
+							<div class="ub ub-ac ub-pc ub-f1" style="background: #f2af27" onclick="addCar()">
+								<div class="ub ub-ac ub-ver ub-pc ub-f1">
+									加入购物车
+
+								</div>
+							</div>
+							<div class="ub ub-ac ub-pc ub-f1 gosure" style="background: #a4046b" onclick="LjGouMai()">
+								<div class="ub ub-ac ub-pc">
+									<div class="ub ub-pc ub-ac open-submit">立即购买</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script src="../common/js/appcan.tab.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	</body>
+	<script>
+		var FgoodsCount = 0;
+		var Fattrid = "";
+		var Fattrname = "";
+		var tabview = appcan.tab({
+			selector: "#header",
+			hasIcon: false,
+			hasAnim: true,
+			hasLabel: true,
+			hasBadge: false,
+			data: [{
+				label: "商品",
+			}, {
+				label: "详情",
+			}]
+		});
+		tabview.on("click", function(obj, index) { /*TAB变更时切换多浮动窗口*/
+
+			//appcan.window.publish('mybill0', '');
+			//appcan.window.publish('mybill1', '');
+			//appcan.window.publish('mybill2', '');
+			appcan.window.selectMultiPopover("content", index);
+		})
+		appcan.ready(function() {
+			appcan.window.subscribe('quickgoods', function(msg) {
+				$(".carcount").text(msg);
+			});
+			//购买数量
+			appcan.window.subscribe('FgoodsCount', function(msg) {
+				FgoodsCount = msg;
+			});
+			appcan.window.subscribe('Fattrname', function(msg) {
+				Fattrname = msg;
+			});
+			appcan.window.subscribe('Fattrid', function(msg) {
+				Fattrid = msg;
+			});
+			appcan.window.subscribe('billmove', function(index) {
+				appcan.window.selectMultiPopover("content", index);
+				tabview.moveTo(index);
+			});
+			billindex = appcan.locStorage.getVal("billindex");
+			tabview.moveTo(billindex);
+			var top = $('#head').offset().height + $('#header').offset().height;
+			appcan.frame.open({ /*创建多浮动窗口*/
+				id: "content",
+				url: [{
+					"inPageName": "mybills_debt",
+					"inUrl": "product_content.html",
+				}, {
+					"inPageName": "mybills_content",
+					"inUrl": "productDetail_content.html",
+				}],
+				top: top,
+				left: 0,
+				index: billindex,
+				change: function(index, res) { /*浮动窗口推拽变更时回调，可控制tab进行同步变更*/
+
+					tabview.moveTo(res.multiPopSelectedIndex);
+				}
+			});
+			window.onorientationchange = window.onresize = function() {
+				appcan.frame.resize("content", 0, top);
+			}
+			appcan.window.subscribe('move', function(msg) {
+				appcan.window.selectMultiPopover("content", msg);
+				tabview.moveTo(msg);
+			});
+		});
+		appcan.button("#nav-left", "btn-act", function() {
+
+			appcan.window.close(-1);
+		})
+
+		//打开购物车
+		appcan.button(".goshopCar", "ani-act", function(a, b) {
+                if(Fsuper.checkUserLogin() == 0) {
+                    return;
+                }
+				appcan.window.open("shopCar", "../shopCar/shopCar.html");
+				//              appcan.window.publish('move', '1');
+			})
+			//打开收藏夹
+		appcan.button(".right_collect", "ani-act", function(a, b) {
+
+				appcan.window.open("collect", "../collect/collect.html");
+				//              appcan.window.publish('move', '1');
+			})
+			//打开确认订单
+			//		appcan.button(".gosure", "ani-act", function(a, b) {
+			//
+			//				appcan.window.open("sureOrder", "../sureOrder/sureOrder.html");
+			//				//              appcan.window.publish('move', '1');
+			//			})
+			//加入购物车
+		function addCar() {
+		    if(Fsuper.checkUserLogin() == 0) {
+                    return;
+                }
+			if(Fattrid == ""){
+				//appcan.window.openToast('请选择商品属性！', '2000');
+				appcan.window.publish('openattr', '');
+				return;
+			}
+			if(FgoodsCount == ""){
+				appcan.window.openToast('请选择商品数量！', '2000');
+				return;
+			}
+			var furl = '/YgylApp/addCar';
+			var datas = {
+				Fuserid: Fsuper.getuserid(),
+				Fgoodsid: appcan.locStorage.getVal("Fgoodsid"),
+				FgoodsCount: FgoodsCount,
+				Fattrid:Fattrid,
+				Fattrname:Fattrname
+			}
+			Fsuper.getresult(furl, datas, addcarcounts);
+		}
+
+		function addcarcounts(row, code) {
+			if(code == 0) {
+				appcan.window.publish('quickgoods', row);
+				appcan.window.openToast('已加入购物车！', '2000');
+			}
+		}
+		//立即购买
+		function LjGouMai() {
+		    if(Fsuper.checkUserLogin() == 0) {
+                    return;
+                }
+			if(Fattrid == ""){
+				//appcan.window.openToast('请选择商品属性！', '2000');
+				appcan.window.publish('openattr', '');
+				return;
+			}
+			if(FgoodsCount == ""){
+				appcan.window.openToast('请选择商品数量！', '2000');
+				return;
+			}
+			var furl = '/YgylApp/LjGouMai';
+			var datas = {
+				Fuserid: Fsuper.getuserid(),
+				Fgoodsid: appcan.locStorage.getVal("Fgoodsid"),
+				FgoodsCount: FgoodsCount,
+				Fattrid:Fattrid,
+				Fattrname:Fattrname
+			}
+			Fsuper.getresult(furl, datas, addcarcountsgm);
+		}
+
+		function addcarcountsgm(row, code) {
+			if(code == 0) {
+				appcan.locStorage.setVal("selecttype", "1");
+				appcan.window.open("sureOrder", "../sureOrder/sureOrder.html");
+			}
+		}
+	</script>
+
+</html>

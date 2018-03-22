@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<!--待付款订单列表-->
+		<div class="ub ub-ver dfk_list list">
+			<!--待付款一个大订单item-->
+
+		</div>
+		<div class="temp uhide">
+			<div class="ub ub-ver dfk_item items">
+				<div class="ub dfk_top">
+					<div class="ub ub-f1 bc-text">
+						<span>订单编号</span>
+						<span class="ForderNum"></span>
+					</div>
+					<div class="ub lscolor Fstate">
+						交易完成
+					</div>
+				</div>
+
+				<!--内部一个小订单列表订单item-->
+				<div class="childs">
+
+				</div>
+				<!--一个小订单列表订单底部-->
+				<div class="ub ub-ver ub-ae small_botom">
+					<div class="ub color96 font09 umar-b">
+						<span class="umar-r">优惠券</span>
+						<span>-￥</span>
+						<span>0.00</span>
+					</div>
+					<div class="ub umar-b color96 font09">
+						<span class="umar-r">运费</span>
+						<span>+￥</span>
+						<span>0.00</span>
+					</div>
+					<div class="ub bc-text ">
+						<span class="color96 font09">共</span>
+						<span class=" font09 totalgoods">0</span>
+						<span class="marginr6 color96 font09">件商品</span>
+						<span class="umar-r bc-text">实付 ¥</span>
+						<span class="bc-text factmoney">0.00</span>
+					</div>
+				</div>
+				<div class="ub ub-pe small_btns uhide">
+					<div class="ub ub-ac ub-pc btn_qx cancelorder">
+						取消订单
+					</div>
+					<div class="ub ub-ac ub-pc btn_zf gotopay">
+						去支付
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="childtemp uhide">
+			<!--内部一个小订单列表订单item-->
+			<div class="ub bc-text small_item childitem">
+				<div class="ub  ub-f1  small_left">
+					<div class="ub left_img">
+						<img class="ub ub-img Fimgs" src="../collect/css/myImg/1.png" />
+					</div>
+					<div class="ub ub-f1  ub-ver">
+						<div class="ub txthide bc-text umar-b Fname">
+
+						</div>
+						<div class="ub bc-text font08 color96 Fattrname">
+
+						</div>
+					</div>
+				</div>
+				<div class="ub bc-text   ub-ae  ub-ver small_right">
+					<div class="ub  bc-text  ub-pe txthide">
+						<span>￥</span>
+						<span class="ptyhj">0.00</span>
+					</div>
+					<div class="ub  font09 sc-text bc-text txthide">
+						<span>x</span>
+						<span class="FgoodsCount">1</span>
+					</div>
+					<div class="ub ub-ac  botom_left">
+						<div class="ub ub-ac record_sign">
+							<img class="ub ub-ac" src="../common/images/vip.png" />
+						</div>
+						<div class="ub bc-text lscolor txthide">
+							<span>￥</span>
+							<span class="Fvipj">0.00</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../common/js/jquery.1.10.2.js"></script>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+
+	</body>
+	<script>
+		var Fstart = 0;
+		var pageSize = 10;
+		appcan.ready(function() {
+			getOrderList();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					Fstart = 0;
+					$(".list").empty();
+					getOrderList();
+				} else if(type == 1) {
+					getOrderList();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+		//打开常见问题
+		appcan.button(".cjwt", "ani-act", function(a, b) {
+
+			appcan.window.open("questions", "../questions/questions.html");
+			appcan.window.publish('questions', '');
+			//              appcan.window.publish('move', '1');
+		})
+
+		function getOrderList() {
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				FselectType: "4",
+				pageSize: pageSize,
+				Fstart: Fstart,
+			};
+			Fsuper.getrows('/ygylapp/getOrderList', parm, addorder, function() {});
+		}
+
+		function addorder(row, end) {
+			var Fmoneys = 0;
+			$(row.childs).each(function(i, rows) {
+				Fmoneys = (Fmoneys + Number(rows.FgoodsCount) * Number(rows.Fvipj)).toFixed(2); ;
+			});
+			var list = $(".list");
+			var item = $(".temp").clone();
+			var domitem = item.find(".items");
+			domitem.attr("id", "items" + row.Forderid);
+			domitem.find(".ForderNum").text(row.ForderNum);
+			domitem.find(".factmoney").text(Fmoneys);
+			domitem.find(".totalgoods").text(row.childs.length);
+			getGoodsAttrbuteChildById(list, domitem, row.childs);
+			//domitem.find(".cancelorder").attr("onclick", "cancelorder(" + row.Forderid + ",this)");
+			//domitem.find(".gotopay").attr("onclick", "gotopay(" + row.Forderid + ",this)");
+			list.append(domitem);
+			Fstart = end;
+		}
+
+		function getGoodsAttrbuteChildById(list, domitem, rows) {
+			$(rows).each(function(i, row) {
+				additems(list, domitem, row);
+			});
+		}
+
+		function additems(list, domitem, row, length, id) {
+			var goodslist = domitem.find(".childs");
+			var clonedom = $(".childtemp").clone();
+			var goodsdom = clonedom.find(".childitem");
+			goodsdom.attr("id", row.Fid);
+			goodsdom.find(".Fattrname").text(row.Fid);
+			goodsdom.find(".FgoodsCount").text(row.FgoodsCount);
+			goodsdom.find(".Fname").text(row.Fname);
+			goodsdom.find(".ptyhj").text(row.ptyhj);
+			goodsdom.find(".Fvipj").text(row.Fvipj);
+			goodslist.append(goodsdom);
+			list.append(domitem);
+		}
+
+		function gotopay(Fid) {
+			alert(Fid);
+		}
+
+		function cancelorder(Fid) {
+			alert(Fid);
+		}
+	</script>
+
+</html>

@@ -1,0 +1,6 @@
+.collect_item { border-bottom: 1px solid #E1E1E1;padding-top: 0.6em; }
+.collect_item .item_left {width: 3em;height:3em;overflow:hidden;border: 1px solid #d8d8d8;border-radius:0.4em;margin-left: 1em; background: #fff;}
+.item_left img{ width: 3em; height: 3em; border-radius: 0.4em;}
+.collect_item .item_right {margin:0 1em;}
+.collect_item .item_right .money{margin-top:0.3em;color: #a4046b;}
+.car_img img{ width: 1.5em;}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp  bc-bg" ontouchstart>
+		<!--头部全部-->
+		<div class="ub top uhide">
+			<div class="ub ub-ac">
+				全部
+			</div>
+			<div class="ub">
+				<img src="../common/images/up.png" />
+			</div>
+		</div>
+		<div class="goodslisttemp uhide">
+			<div class="ub product_item">
+				<div class="ub product_left">
+					<img class="Fimgs" src="css/myImg/kele.jpg" />
+				</div>
+				<div class="ub ub-f1 ub-ver product_right">
+					<div class="ub txthide2 umar-b Fname">
+						
+					</div>
+					<div class="ub ub-f1 ub-ae  product_botom">
+						<div class="ub ub-ver ub-f1 umar-b botom_left">
+							<div class="ub ub-ver">
+								<span>￥</span>
+								<span class="Fprice">0.00</span>
+							</div>
+							<div class="ub ub-ac">
+								<span>
+								<img class="ub ub-ac" style="width: 1em;" src="../common/images/vip.png" />
+							</span>
+								<span class="lscolor">￥</span>
+								<span class="lscolor FzheKouJ">0.00</span>
+							</div>
+						</div>
+						<div class="ub ub-ac ub-pc botom_right uhide">
+							<img style="width: 1.5em;" src="../common/images/shop_car.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--商品列表-->
+		<div class="ub ub-ver bc-text product_list">
+
+		</div>
+	</body>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	<script>
+		var pageSize = 10;
+		var Fstart = 0;
+		appcan.ready(function() {
+			getGoodsListByCatId();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					Fstart = 0;
+					$(".product_list").empty();
+					getGoodsListByCatId();
+				} else if(type == 1) {
+					getGoodsListByCatId();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+
+		function getGoodsListByCatId() {
+			var parm = {
+				pageSize: pageSize,
+				Fstart: Fstart,
+				Fcategoryid:appcan.locStorage.getVal("Fcatid")
+			};
+			console.log(parm);
+			Fsuper.getrows('/ygylApp/getGoodsListByCatId', parm, addtj);
+		}
+
+		function addtj(row, end) {
+			var strs = new Array();
+			strs = row.Fimgs.split(",");
+			var list = $($(".product_list"));
+			var itemclone = $(".goodslisttemp").clone();
+			var item = itemclone.find(".product_item");
+			item.attr("id", row.Fid);
+			item.attr("onclick", "detailgoods('" + row.Fid + "',this)");
+			item.find(".Fimgs").attr('src', Serverurl + "/" + strs[0]);
+			item.find(".Fname").text(row.Fname);
+			item.find(".Fprice").text(row.Fprice);
+			item.find(".FzheKouJ").text(row.FzheKouJ);
+			list.append(item);
+			Fstart = end;
+		}
+		//商品详情
+		function detailgoods(Fid, dom) {
+			var Fgoodsid = appcan.locStorage.setVal("Fgoodsid", Fid);
+			appcan.window.open("productDetail", "../productDetail/productDetail.html");
+		}
+	</script>
+
+</html>

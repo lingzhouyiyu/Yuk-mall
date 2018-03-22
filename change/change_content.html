@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver  bc-text">
+			<div class="ub ub-ac top">
+				您正在修改绑定的手机号，请进行身份验证
+			</div>
+			<div class="ub ub-f1 change_item03 change01">
+				<div class="ub ub-ac ub-f1">
+					原手机号能接收验证码
+				</div>
+				<div class="ub ub-ac right_img">
+					<img src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+			<div class="ub ub-f1 change_item03 change02">
+				<div class="ub ub-ac ub-f1">
+					原手机号不能接收验证码
+				</div>
+				<div class="ub ub-ac right_img">
+					<img src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-ac top lxkf">
+			<span>如无法自助修改，请拨打人工客服 </span>
+			<span class="lscolor">0871-6888888</span>
+		</div>
+		<!--客服电话弹窗-->
+		<div class="changeCar kefu uhide">
+			<div class="ub ub-ver car_main">
+				<div class="ub ub-ac ub-pc car_tel">
+					请联系人工客服进行更改绑定
+				</div>
+				<div class="ub ub-pc ub-ac car_content color96">
+					0871-688888888
+				</div>
+				<div class="ub ub-ac ub-pc car_btn">
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh border-right outkf">
+						取消
+					</div>
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh lscolor">
+						拨打
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../common/js/jquery.1.10.2.js"></script>
+	</body>
+	<script>
+		//打开客服电话
+		appcan.button(".lxkf", "ani-act", function(a, b) {
+
+				$(".kefu").removeClass("uhide");
+			})
+			//关闭客服电话
+		appcan.button(".outkf", "ani-act", function(a, b) {
+
+				$(".kefu").addClass("uhide");
+			})
+			
+			//能接收验证码
+		appcan.button(".change01", "ani-act", function(a, b) {
+
+			appcan.window.open("change01", "../change/change01/change01.html");
+			//              appcan.window.publish('move', '1');
+		})
+		//不能接收验证码
+		appcan.button(".change02", "ani-act", function(a, b) {
+
+			appcan.window.open("change03", "../change/change03/change03.html");
+			//              appcan.window.publish('move', '1');
+		})
+	</script>
+
+</html>

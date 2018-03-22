@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver  changebox">
+			<div class="ub ub-f1 uinput change_item">
+				<input class="ub ub-f1" type="text" placeholder="请输入支付密码" />
+			</div>
+		</div>
+		<div class="ub btn_box">
+			<div class="ub ub-ac ub-pc ub-f1 go_btn">
+				申请审核
+			</div>
+		</div>
+		<!--客服电话弹窗-->
+		<div class="changeCar kefu uhide">
+			<div class="ub ub-ver car_main">
+				<div class="ub ub-ac ub-pc car_tel">
+					请联系人工客服进行更改绑定
+				</div>
+				<div class="ub ub-pc ub-ac car_content color96">
+					0871-688888888
+				</div>
+				<div class="ub ub-ac ub-pc car_btn">
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh border-right outkf">
+						取消
+					</div>
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh lscolor">
+						拨打
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../../common/js/jquery.1.10.2.js"></script>
+	</body>
+	<script>
+		//打开客服电话
+		appcan.button(".go_btn", "ani-act", function(a, b) {
+
+				$(".kefu").removeClass("uhide");
+			})
+			//关闭客服电话
+		appcan.button(".outkf", "ani-act", function(a, b) {
+
+				$(".kefu").addClass("uhide");
+			})
+	</script>
+
+</html>

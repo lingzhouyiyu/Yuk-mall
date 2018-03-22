@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/idangerous.swiper.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="flash">
+			<div class="swiper-container">
+				<div class="ub ub-ac swiper-wrapper">
+					<!--<div class=" swiper-slide">
+						<img src="css/myImg/product01.jpg">
+					</div>
+					<div class="swiper-slide">
+						<img src="../collect/css/myImg/1.png">
+					</div>
+					<div class="swiper-slide">
+						<img src="css/myImg/product01.jpg">
+					</div>-->
+				</div>
+			</div>
+			<div class="pagination"></div>
+		</div>
+		<div class="ub product_detail">
+			<div class="ub Fname ub-f1">
+
+			</div>
+			<div class="ub ub-ver bc-text product_right">
+				<div class="ub">
+					<img style="width: 1.5em;" src="../common/images/share.png" />
+				</div>
+				<div class="ub ub-ac ub-pc sc-text">
+					分享
+				</div>
+			</div>
+		</div>
+		<div class="ub product_txt02 redcolor Fdes">
+		</div>
+		<div class="ub product_price">
+			<div class="ub ub-f1">
+				<div class="ub zscolor umar-r font_size125">
+				<span>￥</span>
+				<span class="Fprice">0.00</span>
+			</div>
+			<div class="ub glodcolor">
+				<span>/会员价</span>
+				<span>￥</span>
+				<span class="FzheKouJ">0.00</span>
+			</div>
+			</div>
+			<div class="ub ub-ac ub-pc vip_btn">
+				加入会员
+			</div>
+		</div>
+		<div class="ub ub-ver fw">
+			<div class="ub ub-ac by">
+				<div class="ub ub-f1">
+					<div class="ub sc-text pro_left">服务</div>
+					<div class="ub pro_sign">邮</div>
+					<div class="ub bc-text">
+						运费5元,满86包邮
+					</div>
+				</div>
+				<div class="ub ub-ac">
+					<img class="ub ub-ac" style="width: 0.6em;" src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+			<div class="ub ub-ver cx">
+				<div class="ub">
+					<div class="ub sc-text pro_left">促销</div>
+					<div class="ub bc-text">可参与已下促销</div>
+				</div>
+				<div class="ub fq">
+					<div class="ub ub-ac ub-pc pro_sign02">返券</div>
+					<div class="ub ub-f1 bc-text">
+						支付满99可返100元支付满99可返100元支付满99可返100元支付满99可返100元支付满99可返100元
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-ver pro_address">
+			<div class="ub ub-f1 ub-ac dz">
+				<div class="ub ub-f1">
+					<div class="ub sc-text pro_left">送至</div>
+					<div class="ub bc-text">
+						昆明市五华区
+					</div>
+				</div>
+				<div class="ub ub-ac">
+					<img class="ub ub-ac" style="width: 0.6em;" src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+			<div class="ub sc-text dz_bottom">
+				<span>现在下单，预计</span>
+				<span>下周五(</span>
+				<span>12月25日</span>
+				<span>)到达</span>
+			</div>
+		</div>
+		<div class="ub js">
+			<div class="ub ub-f1 ub-ac by hascheck" onclick=getphone()>
+				<div class="ub ub-f1">
+					<div class="ub sc-text pro_left">已选</div>
+					<div class="ub ub-f1 bc-text txthide">
+						<span class="gmsp"></span>
+						<span class="FgoodsCounts">0</span>
+						<span>件</span>
+					</div>
+				</div>
+				<div class="ub ub-ac">
+					<img class="ub ub-ac" style="width: 0.6em;" src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+		</div>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../common/js/jquery.1.10.2.js"></script>
+		<script type="text/javascript" src="../common/js/idangerous.swiper.min.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+				//购买数量
+				appcan.window.subscribe('FgoodsCount', function(msg) {
+					$(".FgoodsCounts").text(msg);
+				});
+				appcan.window.subscribe('openattr', function(msg) {
+					getphone();
+				});
+				appcan.window.subscribe('Fattrname', function(msg) {
+					$(".gmsp").text($(".Fname").text() + " " + msg);
+				});
+				getGoodsInfoByid();
+			})
+			//幻灯片
+			//		var mySwiper = new Swiper('.flash .swiper-container', {
+			//			pagination: '.flash .pagination',
+			//			loop: true,
+			//			grabCursor: true,
+			//			paginationClickable: true,
+			//			autoplay: 5000,
+			//		});
+			//查询商品信息
+		function getGoodsInfoByid() {
+			var parm = {
+				Fgoodsid: appcan.locStorage.getVal("Fgoodsid")
+			};
+			console.log(parm);
+			appcan.ajax({
+				url: Serverurl + "/YgylApp/getGoodsInfoByid",
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var rows = result.data[0];
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					console.log(rows);
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							var strFn=msg;
+							appcan.window.publish('Fdes', rows.Fdes);
+							appcan.window.publish('FNrhtml', strFn);
+							$(".Fname").text(rows.Fname);
+							$(".Fprice").text(rows.Fprice);
+							$(".Fdes").text(rows.Fdes);
+							$(".FzheKouJ").text(rows.FzheKouJ);
+							appcan.locStorage.setVal("Ftypeid", rows.Ftypeid);
+							var newimg = new Array();
+							newimg = rows.Fimgs.split(",");
+							var length = newimg.length;
+							for(var i = 0; i < newimg.length; i++) {
+								var img = '<div class="swiper-slide"><img src=' + Serverurl + '/' + newimg[i] + ' class = "" /></div>'
+								$(".swiper-wrapper").append(img);
+							}
+							//  图片轮播js
+							var swiper = new Swiper('.swiper-container', {
+								pagination: '.pagination',
+								loop: true,
+								grabCursor: true,
+								paginationClickable: true,
+								autoplay: 5000,
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		function getphone() {
+			//appcan.window.publish('Fgoodsidseting', appcan.locStorage.getVal("Fgoodsid"));
+			appcan.window.open({
+				name: 'spaceSlect',
+				dataType: 0,
+				data: 'spaceSlect.html',
+				aniId: 12,
+				type: 256
+			});
+		}
+	</script>
+
+</html>

@@ -1,0 +1,111 @@
+
+.gRG_rg{
+	margin-top: 1em;
+}
+.gRG_rg .rg1{	
+	border-bottom: 1px solid #cacaca;
+	margin: 0 2em;
+	}
+.gRG_rg .rg2{	
+	border-bottom: 1px solid #cacaca;
+	margin: 0 2em;
+//	background: url("../../gRegister/css/myImg/eye.png")  no-repeat right center ;
+	}
+.gRG_rg .rg3{	
+	border-bottom: 1px solid #cacaca;
+	margin: 0 2em;
+	}
+.gRG_rg .rg1 input{
+	font-size: 1em;
+	color:#a9a0be;
+	background-color:transparent;
+	border: none;
+	padding: 0.3em 0;
+	margin: 0.5em 0;
+}
+.gRG_rg .rg2 input{
+	font-size: 1em;
+	color:#a9a0be;
+	background-color:transparent;
+	border: none;
+	padding: 0.3em 0;
+	margin: 0.5em 0;
+}
+
+.gRG_rg .rg3 input{
+	font-size: 1em;
+	color:#a9a0be;
+	background-color:transparent;
+	border: none;
+	padding: 0.3em 0;
+	margin: 0.5em 0;
+}
+.gRG_rg .rg3 .yzm{
+	
+	color: #f39800;
+   
+}
+.inviter_num  .yqr{
+	margin: 1em 2em;
+}
+
+.inviter_num  .yqr img{
+	width: auto;
+	height: auto;
+	width:150%;
+}
+.inviter_num  .a{
+	margin-left: 0.5em;
+	text-decoration: none;
+	color: #a4046b;
+	font-size: 1em;
+	font-weight: 200;
+}
+.inviter_num  .srk{
+	margin-left: 2em;
+	margin-right: 2em;
+margin-bottom: 1em;
+}
+
+.inviter_num  .srk input{
+	font-size: 1em;
+	color:#a9a0be;
+	background-color:transparent;
+	border: none;
+	padding: 0.5em 0;
+	border-bottom: 1px solid #cacaca;
+	width: 100%;
+
+}
+
+.zc{
+	height: 2.5em;
+	background: #a4046b;
+	color: #F0F0F0;
+	font-size: 1.2em;
+	border-radius: 0.4em;
+	margin-left: 1em;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+.gRgChoose span{
+	font-size: 1em;
+	color: #969696;
+}
+.gRgChoose .a{
+	
+	color: #a4046b;
+	font-size: 1em;
+}
+.gRgLogin{
+	margin-top: 3em;
+}
+.gRgLogin span{
+	font-size: 1em;
+	color: #96966;
+}
+.gRgLogin .gRg_ljdl{
+	text-decoration: none;
+	color: #a4046b;
+	font-size: 1em;
+}

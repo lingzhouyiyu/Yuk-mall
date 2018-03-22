@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<!--待付款订单列表-->
+		<div class="ub bc-text ub-ver dfk_list">
+			<!--待付款一个大订单item-->
+			<div class="ub ub-ver shenhe_item">
+				<div class="ub ub-ver ub-f1">
+					<div class="ub dfk_top dfk_top02">
+						<div class="ub ub-f1 bc-text">
+							<span>订单编号</span>
+							<span>2016120310511125</span>
+						</div>
+						<div class="ub lscolor">
+							待收货
+						</div>
+					</div>
+					<div class="ub">
+						<div class="ub shenhe_left">
+						<img src="../../collect/css/myImg/1.png" />
+					</div>
+					<div class="ub ub-f1 ub-ver shehe_right">
+						<div class="ub right_top">
+							<span>第</span>
+							<span>12</span>
+							<span>期</span>
+							<span>0元购 iPhone 7(128G)</span>
+						</div>
+						<div class="ub  shenhe_item02 sc-text">
+							<div class="ub ub-f1">
+								投资金额
+							</div>
+							<div class="ub">
+								<span>￥</span>
+								<span>5,800</span>
+							</div>
+						</div>
+						<div class="ub shenhe_item02 sc-text">
+							<div class="ub ub-f1">
+								年利率
+							</div>
+							<div class="ub">
+								<span>12.9</span>
+								<span>%</span>
+							</div>
+						</div>
+						<div class="ub shenhe_item02 sc-text">
+							<div class="ub ub-f1">
+								期限
+							</div>
+							<div class="ub">
+								<span>30</span>
+								<span>天</span>
+							</div>
+						</div>
+						<div class="ub shenhe_item02 sc-text">
+							<div class="ub ub-f1">
+								前置利息额度
+							</div>
+							<div class="ub">
+								<span>￥</span>
+								<span>5,800</span>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="ub ub-ver shehe_botom">
+					<div class="ub sc-text  botom_item">
+						<span>收货姓名：</span>
+						<span>样</span>
+					</div>
+					<div class="ub sc-text  botom_item">
+						<span>联系电话：</span>
+						<span>138888888888</span>
+					</div>
+					<div class="ub sc-text  botom_item">
+						<span>收货地址：</span>
+						<span>云南省昆明市五华区戛纳小镇C座</span>
+					</div>
+				</div>
+				<div class="ub botom_status">
+					<div class="ub ub-f1 color96">
+						利息前置额度支付
+					</div>
+					<div class="ub">
+						<span>实付</span>
+						<span class="lscolor">￥</span>
+						<span class="lscolor">5900</span>
+					</div>
+				</div>
+				<div class="ub ub-pe small_btns">
+					<div class="ub ub-ac ub-pc btn_zf">
+						确认收货
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../../common/js/jquery.1.10.2.js"></script>
+	</body>
+	<script>
+		
+		//打开常见问题
+		appcan.button(".cjwt", "ani-act", function(a, b) {
+
+			appcan.window.open("questions", "../questions/questions.html");
+			appcan.window.publish('questions', '');
+			//              appcan.window.publish('move', '1');
+		})
+	</script>
+
+</html>

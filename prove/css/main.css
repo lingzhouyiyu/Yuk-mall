@@ -1,0 +1,42 @@
+.a_1{
+	
+	border-bottom: 6px solid #f0f0f0;
+	background: #fff;
+}
+.a_1 .word{
+	padding: 0.5em 1em 1em 1em;
+}
+.a_1 .word .sfyz{width: 33.3%;}
+.a_1 .word .szjymm{width: 33.3%;}
+.a_1 .word .bdyhk{width: 33.3%;}
+.a_2{padding: 1em;border-bottom: 6px solid #f0f0f0; background: #fff;}
+.a_2 .word{padding-right: 2em;}
+.a_2 .xm{
+	padding: 0.5em 0;
+	border-bottom: 1px solid #f0f0f0;
+}
+.a_2 .sfz{
+	padding: 0.5em 0;
+	border-bottom: 1px solid #f0f0f0;
+}
+.a_2 .jjlxr{
+	padding: 0.5em 0;
+	border-bottom: 1px solid #f0f0f0;
+}
+.a_2 .jjlxrdh{
+	padding: 0.5em 0;
+}
+.a_3{
+padding: 2em 1em 1em 1em;}
+.a_3 .sqyz{
+	color: #F0F0F0;background: #a4046b;padding: 0.9em;border-radius: 6px;
+}.a_4{padding-bottom: 1em;font-size: 0.9em;}
+.a_4 .word{color: #b5b5b4;}
+.a_4 .num{color: #ff721f;}
+.prove_top{ padding:0.4em 1em 0 1em; background: #fff;}
+.prove_top img{ width: 100%;}
+.prove_success{ background: #fff; padding: 1em 0 2em 0;}
+.prove_img img{ width: 2em; padding: 1em;}
+.prove_txt{ padding-bottom: 1em;}
+.prove_btn{ height: 2.2em; width: 6em; border: 1px solid #DCDCDC; border-radius: 8px; color: #646464;}
+.prove_btn04{ margin-right: 1em;}

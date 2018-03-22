@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div id="list" class="ub ub-ver allshop_list ">
+			<!--单个店铺item-->
+			<div class="ub ub-ver shoplist_item">
+				<!--头部全选-->
+				<div class="ub ub-ac shopcar_top">
+					<div class="ub ub-ac  ub-f1 allcheck_box">
+						<div class="ub ub-ac  umar-r check_all">
+							<div class="ub allcheck checkall_radio headimgs"></div>
+							<img class="check_ok ub-img checkall_img uhide allimgs" src="../common/images/ok.png" />
+						</div>
+						<div class="ub mall_img umar-r">
+							<img class="ub-img" src="../common/images/waipo.png" />
+						</div>
+						<div class="ub txthide bc-text">
+							宜众便利自营
+						</div>
+					</div>
+					<div class="ub lscolor">
+						删除
+					</div>
+				</div>
+				<!--店铺商品购物车列表-->
+				<div class="ygylzytemp uhide">
+					<div class="ub ub-ac shopcar_item zyitem">
+						<div class="ub shopitem_left" onclick="clickalone(this)">
+							<div class="ub ub-ac  umar-r dbcheck">
+								<div class="ub allcheck check_radio"></div>
+								<img href="" id="" class="check_ok ub-img uhide imgid" src="../common/images/ok.png" />
+							</div>
+							<div class="ub shopcar_img ">
+								<img class="Fimgs" src="../common/images/jx01.jpg" />
+							</div>
+						</div>
+						<div class="ub ub-ver shopitem_right ub-f1">
+							<div class="ub bc-text txthide2 Fname">
+
+							</div>
+							<div class="ub shopcar_botm">
+								<div class="ub ub-f1 lscolor">
+									<span>￥</span>
+									<span class="Fprice">0.00</span>
+								</div>
+								<div class="ub  ub-pe  shop_cotrl">
+									<div class="ub ub-ac ub-pc cotrlL">-</div>
+									<div class="ub ub-ac ub-pc cotrlNum goods_num FgoodsCount">0</div>
+									<div class="ub ub-ac ub-pc cotrlR">+</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ub ub-ver shopcar_list ygylzylist">
+
+				</div>
+			</div>
+			<div class="ub ub-ver shoplist_item">
+				<!--头部全选-->
+				<div class="ub ub-ac shopcar_top">
+					<div class="ub ub-ac  ub-f1 allcheck_box">
+						<div class="ub ub-ac  umar-r check_all">
+							<div class="ub allcheck checkall_radio headimgs"></div>
+							<img class="check_ok ub-img checkall_img uhide allimgs" src="../common/images/ok.png" />
+						</div>
+						<div class="ub mall_img umar-r">
+							<img class="ub-img" src="../common/images/waipo.png" />
+						</div>
+						<div class="ub txthide bc-text">
+							易购易乐商城
+						</div>
+					</div>
+					<div class="ub lscolor">
+						删除
+					</div>
+				</div>
+				<!--购物车列表-->
+				<div class="ygylsctemp uhide">
+					<div class="ub ub-ac shopcar_item ygylscitem">
+						<div class="ub shopitem_left" onclick="clickalone(this)">
+							<div class="ub ub-ac  umar-r dbcheck">
+								<div class="ub allcheck check_radio"></div>
+								<img href="" id="" class="check_ok ub-img uhide imgid" src="../common/images/ok.png" />
+							</div>
+							<div class="ub shopcar_img ">
+								<img class="Fimgs" src="../common/images/jx01.jpg" />
+							</div>
+						</div>
+						<div class="ub ub-ver shopitem_right ub-f1">
+							<div class="ub bc-text txthide2 Fname">
+
+							</div>
+							<div class="ub shopcar_botm">
+								<div class="ub ub-f1 lscolor">
+									<span>￥</span>
+									<span class="Fprice">0.00</span>
+								</div>
+								<div class="ub  ub-pe  shop_cotrl">
+									<div class="ub ub-ac ub-pc cotrlL">-</div>
+									<div class="ub ub-ac ub-pc cotrlNum goods_num FgoodsCount">0</div>
+									<div class="ub ub-ac ub-pc cotrlR">+</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ub ub-ver shopcar_list ygylsclist">
+
+				</div>
+			</div>
+		</div>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	</body>
+	<script>
+		var totalmoney = 0;
+		//商品单选
+		//		appcan.button(".shopitem_left", "ani-act", function(a, b) {
+		//
+		//			var cur_img = $(this).find(".dbcheck img");
+		//			var cur_radio = $(this).find(".dbcheck .check_radio");
+		//			var curall = $(this).parent().parent().siblings(".shopcar_top");
+		//			if($(cur_img).hasClass("uhide")) {
+		//				$(cur_img).removeClass("uhide");
+		//				$(cur_radio).addClass("uhide");
+		//			} else {
+		//				$(cur_img).addClass("uhide");
+		//				$(cur_radio).removeClass("uhide");
+		//				//同时店铺全选取消
+		//				$(curall).find(".checkall_radio").removeClass("uhide");
+		//				$(curall).find(".checkall_img").addClass("uhide");
+		//			}
+		//
+		//		})
+		function clickalone(dom) {
+			//totalmoney = 0;
+			var cur_img = $(dom).find(".dbcheck img");
+			var cur_radio = $(dom).find(".dbcheck .check_radio");
+			var curall = $(dom).parent().parent().siblings(".shopcar_top");
+			if($(cur_img).hasClass("uhide")) {
+				$(cur_img).removeClass("uhide");
+				$(cur_radio).addClass("uhide");
+				$(cur_img).addClass("checkradio");
+			} else {
+				$(cur_img).addClass("uhide");
+				$(cur_radio).removeClass("uhide");
+				//同时店铺全选取消
+				$(curall).find(".checkall_radio").removeClass("uhide");
+				$(curall).find(".checkall_img").addClass("uhide");
+				$(cur_img).removeClass("checkradio");
+			}
+			var list = $("#list .checkradio");
+			eachlist(list);
+		}
+
+		function initimg() {
+			$("#list .allimgs").removeClass("uhide");
+			$("#list .headimgs").addClass("uhide");
+			$("#list .imgid").removeClass("uhide");
+			$("#list .imgid").addClass("checkradio");
+			$("#list .check_radio").addClass("uhide");
+			var list = $("#list .checkradio");
+			eachlist(list);
+		}
+		//单个店铺商品全选
+		$(".allcheck_box").click(function() {
+			//totalmoney = 0;
+			var checkall_img = $(this).find(".check_all img");
+			var checkall_radio = $(this).find(".check_all .checkall_radio");
+			var curobj = $(this).parent().siblings(".shopcar_list ");
+			if($(checkall_img).hasClass("uhide")) {
+				$(checkall_img).removeClass("uhide");
+				$(checkall_radio).addClass("uhide");
+				$(curobj).find(".dbcheck .check_radio").addClass("uhide");
+				$(curobj).find(".dbcheck img").removeClass("uhide");
+				$(curobj).find(".dbcheck img").addClass("checkradio");
+
+			} else {
+				$(checkall_img).addClass("uhide");
+				$(checkall_radio).removeClass("uhide");
+				$(curobj).find(".dbcheck .check_radio").removeClass("uhide");
+				$(curobj).find(".dbcheck img").addClass("uhide");
+				$(curobj).find(".dbcheck img").removeClass("checkradio");
+			}
+			var list = $("#list .checkradio");
+			eachlist(list);
+		});
+
+		//		//购物车数量减少
+		//		$(".cotrlL").click(function() {
+		//
+		//			var goods_num = $(this).siblings(".cotrlNum"); //增加前商品数量
+		//			num = $(goods_num).text();
+		//			num--;
+		//			goods_num.text(num); //增加后商品数量
+		//		});
+		//
+		//		//购物车数量增加
+		//		$(".cotrlR").click(function() {
+		//
+		//			var goods_num = $(this).siblings(".cotrlNum"); //增加前商品数量
+		//			num = $(goods_num).text();
+		//			num++;
+		//			goods_num.text(num); //增加后商品数量
+		//		});
+		//购物车数量添加
+		function add(dom) {
+			//totalmoney = 0;
+			var goods_num = $(dom).siblings(".goods_num"); //增加前商品数量
+			var checkCount = $(dom).parent().siblings().find(".checkCount"); //增加前x1商品数量
+
+			num = $(goods_num).text();
+			num++;
+			goods_num.text(num); //增加后商品数量
+			checkCount.text(num); //增加后x1商品数量
+			//$(dom).parent().siblings().find(".total").text((num * $(dom).attr("price")).toFixed(2));
+			//$(dom).parent().parent().find("img").attr("href", num);
+			var list = $("#list .checkradio");
+			eachlist(list);
+		}
+		//购物车数量减少
+		function reduce(dom) {
+			//totalmoney = 0;
+			//如果文本框的值大于0才执行减去方法  
+			var goods_num = $(dom).siblings(".goods_num");
+			var checkCount = $(dom).parent().siblings().find(".checkCount");
+			num = $(goods_num).text();
+			if(num > 0) {
+				if(num == 1) {
+					//执行删除操作
+					var Fgoodsid = $(dom).attr("href");
+					//deletecar(Fgoodsid);
+				} else {
+					num--;
+					goods_num.text(num);
+					checkCount.text(num);
+					//$(dom).parent().parent().find("img").attr("href", num);
+					//$(dom).parent().siblings().find(".total").text((num * $(dom).attr("price")).toFixed(2));
+					var list = $("#list .checkradio");
+					eachlist(list);
+				}
+			}
+		}
+
+		function eachlist(doms) {
+			totalmoney = 0;
+			Nums = 0;
+			nFdetailbillId = "";
+			var goods = [];
+			if($(doms).length > 0) {
+				doms.each(function(i, item) {
+					var obj = {};
+					var id = $(item).attr("id");
+					if(id != "") {
+						id = id.substr(8, id.length - 8);
+						var Fgoodsid = id;
+						nFdetailbillId = nFdetailbillId + id + ",";
+						var selectparm = $(item).parent().parent().parent();
+						var Fcount = selectparm.find(".FgoodsCount").text();
+						var Fprice = $(item).attr("href");
+						obj.Fgoodsid = Fgoodsid;
+						obj.Fcount = Fcount;
+						obj.Fprice = Fprice;
+						obj.Fattrid = $(item).attr("Fattrid");
+						obj.Fattrname = $(item).attr("Fattrname");
+						obj.Fuserid = Fsuper.getuserid();
+						goods.push(obj);
+						selectmoney(Fcount, Fprice);
+					}
+				});
+				Fgoodsids = nFdetailbillId.substring(0, nFdetailbillId.length - 1);
+				appcan.locStorage.setVal("Fgoodsidscar", Fgoodsids);
+				appcan.window.publish('totalmoneycar', totalmoney);
+				appcan.window.publish('Nums', goods.length);
+				appcan.locStorage.setVal("FgoodsArray", goods);
+			} else {
+				selectmoney(0, 0);
+			}
+		}
+
+		function selectmoney(count, money) {
+			totalmoney = totalmoney + Number(count) * Number(money);
+		}
+		appcan.ready(function() {
+			getGoodsInfoForCar();
+			appcan.window.subscribe('hjbtnid', function(msg) {
+
+				if(msg == 0) {
+					$(".check_ok").removeClass("uhide");
+					$(".allcheck").addClass("uhide");
+				} else {
+					$(".check_ok").addClass("uhide");
+					$(".allcheck").removeClass("uhide");
+				}
+				var list = $("#list .checkradio");
+				eachlist(list);
+			});
+		});
+		//加载购物车
+		function getGoodsInfoForCar() {
+			var furl = "/YgylApp/getSureGoodsInfoCar";
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getdata(furl, parm, additem, function() {
+				initimg();
+				appcan.window.publish('cartop', '');
+			});
+		}
+
+		function additem(dom) {
+			if(dom.Ftype == "0") {
+				ygylsc(dom);
+			} else if(dom.Ftype == "1") {
+				ygylzy(dom);
+			}
+		}
+		//易购易乐自营
+		function ygylzy(data) {
+			//totalmoney = totalmoney + Number(data.Fprice);
+			var list = $(".ygylzylist");
+			var clonedom = $(".ygylzytemp").clone();
+			var itemdom = clonedom.find(".zyitem");
+			itemdom.attr("id", data.Fid);
+			itemdom.find(".Fname").text(data.Fname);
+			itemdom.find(".FzheKouJ").text(data.FzheKouJ);
+			itemdom.find(".Fprice").text(data.Fprice);
+			itemdom.find(".imgid").attr("id", "chooseId" + data.Fid);
+			itemdom.find(".imgid").attr("href", data.Fprice);
+			itemdom.find(".imgid").attr("Fattrid", data.Fattrid);
+			itemdom.find(".imgid").attr("Fattrname", data.Fattrname);
+			itemdom.find(".FgoodsCount").text(data.FgoodsCount);
+			itemdom.find(".cotrlL").attr("onclick", "reduce(this)");
+			itemdom.find(".cotrlR").attr("onclick", "add(this)");
+			list.append(itemdom);
+		}
+		//易购易乐商城
+		function ygylsc(data) {
+			//totalmoney = totalmoney + Number(data.Fprice);
+			var strs = new Array();
+			strs = data.Fimgs.split(",");
+			var list = $(".ygylsclist");
+			var clonedom = $(".ygylsctemp").clone();
+			var itemdom = clonedom.find(".ygylscitem");
+			itemdom.attr("id", data.Fid);
+			itemdom.find(".Fname").text(data.Fname);
+			itemdom.find(".Fimgs").attr("src", Serverurl+"/"+strs[0]);
+			itemdom.find(".FzheKouJ").text(data.FzheKouJ);
+			itemdom.find(".Fprice").text(data.Fprice);
+			itemdom.find(".imgid").attr("id", "chooseId" + data.Fid);
+			itemdom.find(".imgid").attr("href", data.Fprice);
+			itemdom.find(".imgid").attr("Fattrid", data.Fattrid);
+			itemdom.find(".imgid").attr("Fattrname", data.Fattrname);
+			itemdom.find(".FgoodsCount").text(data.FgoodsCount);
+			itemdom.find(".cotrlL").attr("onclick", "reduce(this)");
+			itemdom.find(".cotrlR").attr("onclick", "add(this)");
+			list.append(itemdom);
+		}
+	</script>
+
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css" />
+	</head>
+
+	<body class="um-vp ub" style="background:rgba(0,0,0,0.3);" ontouchstart>
+		<div id="content" class="ub ub-ver ub-fv ub-fh space_box">
+			<div class="clean ub-f1"></div>
+			<div class="ub bc-text ub-ver bc-bg">
+				<div class="ub space_close">
+					<img src="../common/images/space_close.png" />
+				</div>
+				<div class="ub ub-ver  space_main">
+
+					<div class="ub space_top">
+						<div class="ub space_left">
+							<img class="Fimgs" src="../collect/css/myImg/1.png" />
+						</div>
+						<div class="ub ub-ver ub-f1 space_right">
+							<div class="ub umar-b Fname">
+							</div>
+							<div class="ub redcolor">
+								<span>￥</span>
+								<span class="Fprice">0.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="listattr">
+
+					</div>
+					<div class="child_box childtemp uhide">
+						<div class="serach-color ufl childitem">
+							<div class="ub ub-ac ub-pc search_border Fattrvalue"></div>
+						</div>
+					</div>
+					<div class="temp uhide">
+						<div class="ub-ac ub-pc hot space01 items">
+							<div class="ub ub-f1">
+								<div class="ub ub-f1 hot_title Fname">
+									颜色
+								</div>
+							</div>
+							<div class="child_box childs">
+
+							</div>
+
+						</div>
+					</div>
+
+					<div class="ub numcontral">
+						<div class="ub ub-f1">
+							购买数量
+						</div>
+						<div class="ub">
+							<div class="ub  ub-pe  shop_cotrl">
+								<div class="ub ub-ac ub-pc cotrlL">-</div>
+								<div class="ub ub-ac ub-pc cotrlNum goods_num FgoodsCount">1</div>
+								<div class="ub ub-ac ub-pc cotrlR">+</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="uf bc-text-head ub ubt" style="position: fixed; left: 0; bottom: 0; border-top: 1px solid #E1E1E1;">
+				<div class="ub " style=" height: 3em;width: 100%;">
+					<div class="ub ub-ac ub-f2" style="background: #313131">
+						<div class="ub-f1 ub" style=" height: 3em">
+							<div onclick="surebtn()" class="ub ub-ac ub-pc ub-f1 ub-fh bc_white bc-text hjbtn" style="padding-left: 1em; background: #a5046c; color: #fff; ">
+								确定
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+				getGoodsInfoByid();
+				getGoodsAttrByid();
+				appcan.window.subscribe('Fgoodsidseting', function(msg) {
+				});
+			})
+			//		//购物车数量减少
+		$(".cotrlL").click(function() {
+
+			var goods_num = $(this).siblings(".cotrlNum"); //增加前商品数量
+			num = $(goods_num).text();
+			num--;
+
+			if(num <= 0) {
+				goods_num.text(0);
+			} else {
+				goods_num.text(num); //增加后商品数量
+			}
+
+		});
+
+		//		//购物车数量增加
+		$(".cotrlR").click(function() {
+
+			var goods_num = $(this).siblings(".cotrlNum"); //增加前商品数量
+			num = $(goods_num).text();
+			num++;
+			goods_num.text(num); //增加后商品数量
+		});
+		//关闭弹层
+		appcan.button(".space_close", "btn-act", function() {
+			appcan.window.close(-1);
+		})
+
+		function getGoodsInfoByid() {
+			var parm = {
+				Fgoodsid: appcan.locStorage.getVal("Fgoodsid")
+			};
+			appcan.ajax({
+				url: Serverurl + "/YgylApp/getGoodsInfoByid",
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var rows = result.data[0];
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							var strs = new Array();
+							strs = rows.Fimgs.split(",");
+							$(".Fname").text(rows.Fname);
+							$(".Fprice").text(rows.Fprice);
+							$(".Fimgs").attr("src", Serverurl+"/"+strs[0]);
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		function getGoodsAttrByid() {
+			var parm = {
+				Fgoodsid: appcan.locStorage.getVal("Fgoodsid"),
+				Ftypeid: appcan.locStorage.getVal("Ftypeid")
+			};
+			appcan.ajax({
+				url: Serverurl + "/YgylApp/getGoodsattr",
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								if(row.Ftype == "1") {
+									var list = $(".listattr");
+									var item = $(".temp").clone();
+									var domitem = item.find(".items");
+									domitem.attr("id", "items" + row.Fid);
+									domitem.find(".Fname").text(row.Fname);
+									getGoodsAttrbuteChildById(list, domitem, row.Fid, row.values);
+									list.append(domitem);
+								}
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		function getGoodsAttrbuteChildById(list, domitem, id, rows) {
+			$(rows).each(function(i, row) {
+				additems(list, domitem, row, length, id);
+			});
+		}
+
+		function additems(list, domitem, row, length, id) {
+			var goodslist = domitem.find(".childs");
+			var clonedom = $(".childtemp").clone();
+			var goodsdom = clonedom.find(".childitem");
+			goodsdom.find(".Fattrvalue").attr("id", row.Fid);
+			goodsdom.find(".Fattrvalue").attr("Fattrid", row.Fid);
+			goodsdom.find(".Fattrvalue").attr("Fattrname", row.Fattrvalue);
+			goodsdom.find(".Fattrvalue").attr("onclick", "selectbtn(" + id + ",this)");
+			goodsdom.find(".Fattrvalue").text(row.Fattrvalue);
+			goodslist.append(goodsdom);
+			list.append(domitem);
+		}
+
+		function selectbtn(id, dom) {
+			$("#items" + id + " .Fattrvalue").removeClass("activebtn");
+			if($(dom).hasClass("activebtn")) {
+				$(dom).removeClass("activebtn");
+			} else {
+				$(dom).addClass("activebtn");
+			}
+		}
+
+		function surebtn() {
+			var list = $("#content" + " .activebtn");
+			if(list.length == 0){
+				appcan.window.openToast('请选择商品属性!', '2000');
+				return;
+			}
+			var Fattrid = "";
+			var Fattrname = "";
+			$(list).each(function(i, row) {
+				var id = $(row).attr("id");
+				if(id != "") {
+					var Fnames = $(row).text();
+					Fattrid = Fattrid + id + ",";
+					Fattrname = Fattrname + Fnames + " ";
+				}
+			});
+			Fattrid = Fattrid.substring(0, Fattrid.length - 1);
+			var FgoodsCount = $(".FgoodsCount").text();
+			if(FgoodsCount == 0){
+				appcan.window.openToast('请选择商品数量!', '2000');
+				return;
+			}
+			appcan.window.publish('FgoodsCount', FgoodsCount);
+			appcan.window.publish('Fattrid', Fattrid);
+			appcan.window.publish('Fattrname', Fattrname);
+			appcan.window.close(-1);
+		}
+	</script>
+
+</html>

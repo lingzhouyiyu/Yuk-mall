@@ -1,0 +1,20 @@
+.consume_banner img{width: 100%; }
+.conm_infor{ background: #fff;  padding-top: 0.6em; padding-bottom: 0.6em; margin-bottom: 0.6em;}
+.conm_botm{border-top: 1px solid #e1e1e1; padding-top: 0.6em;}
+.sj_infor{ background: #fff; padding: 0.6em; margin-bottom: 0.6em;}
+.join{ background: #fff; padding-top: 0.6em; padding-bottom: 0.6em; border-bottom: 1px solid #e1e1e1; }
+.join_top{ padding: 0.6em;  }
+.vip_sign{ background: #0acdb4; color: #fff; border-radius: 5px; padding: 3px 3px; font-size: 0.8em; margin-right: 5px;}
+.consume{ background: #fff; padding: 0.6em;}
+.conm_input input{ border: 1px solid #E1E1E1; border-radius: 8px; padding-left: 5px; }
+.pay_way{ position: relative; border: 1px solid #a4046b; height: 1.8em; width: 5.2em; border-radius: 8px; color: #a4046b;}
+.pay_way img{ position: absolute; right: 0; bottom: 0; width: 0.6em; }
+.way_choose{ margin-top: 1em;}
+.agree{ background: #F0F0F0; padding: 1em;}
+.consume_btn{ background: #fff; padding: 2em 1em;}
+.main_btn{ background: #a4046b; height: 2.8em; color: #fff; border-radius: 0.4em;}
+.coupon{ background: #fff; padding: 1em 0.6em; border-bottom: 1px solid #E1E1E1;}
+.coup_sign{background: #f23030; color: #fff;  padding: 4px 5px; font-size: 0.8em; margin-left: 10px;}
+.sp_price{ background: #fff; padding: 0 0.6em;}
+.consume02{ padding-top: 1em;}
+.gojoin{ height: 1.8em; border-radius:8px; color: #0acdb4; border: 1px solid #0acdb4; padding: 0 5px;}

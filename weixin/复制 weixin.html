@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-white" ontouchstart>
+		<div class="ub ub-ver stations_box">
+			<div class="ub ub-ac station_item stationb">
+				<div class="station_img">
+					<img class="ub ub-ac umar-r" src="css/myImg/car11.png" />
+				</div>
+				<div class="ub ub-f1 col9a">出发地</div>
+				<div class="ub"><span class="colf5a">请选择</span>
+					<span class="cole8">&gt;</span></div>
+			</div>
+			<div class="ub ub-ac station_item stationb">
+				<div class="station_img">
+					<img class="ub ub-ac umar-r" src="css/myImg/car11.png" />
+				</div>
+				<div class="ub ub-f1 col9a ">目的地</div>
+				<div class="ub"><span class="colf5a">请选择</span>
+					<span class="cole8">&gt;</span></div>
+			</div>
+			<div class="ub ub-ac station_item">
+				<div class="station_img">
+					<img class="ub ub-ac umar-r" src="css/myImg/carclock.png" />
+				</div>
+				<div class="ub ub-f1 col9a">出发日期</div>
+				<div class="ub"><span class="colf5a">2017-0-0</span>
+					<span class="cole8">&gt;</span></div>
+			</div>
+		</div>
+		<div class="ub allsbtn">
+			<div class="ub ub-ac ub-pc ub-f1 dbcarbtn">查询</div>
+		</div>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+
+		});
+		appcan.button(".nav-btn", "btn-act", function() {
+			appcan.window.close(-1);
+		})
+	</script>
+
+</html>

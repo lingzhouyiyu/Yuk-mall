@@ -1,0 +1,29 @@
+html,body,img{ margin: 0; padding: 0;}
+
+.stations_box{ margin: 2em 1em; border: 1px solid #e8e8e8; border-radius: 8px;}
+.station_item{ height: 2.8em; padding: 0 0.6em; overflow: hidden;}
+.station_img img{ width: 1.4em;}
+.col9a{ color: #9a9a9a;}
+.colf5a{ color: #f5a623;}
+.cole8{ color: #e8e8e8;}
+.stationb{border-bottom: 1px dashed #e8e8e8; }
+.allsbtn{ padding: 2em;}
+.dbcarbtn{ background: #f5a623; color: #fff; height: 2.8em; border-radius: 8px;}
+
+/*详情*/
+.envtop{ padding: 2em 1em; border-bottom: 1px solid #e8e8e8; margin-bottom: 1em;}
+.font125{ font-size: 1.25em;}
+.envitem{ padding: 0.4em 1em; }
+.col96{ color: #969696;}
+.borderb{ border-bottom: 1px solid #e8e8e8; padding-bottom: 1.4em;}
+
+
+/*个人中心*/
+.use_top{ background: url(myImg/user_bg.png) no-repeat; background-size: cover; padding: 2em; color: #fff;}
+.person_head{ width: 5.5em;}
+.person_name{ margin-right: 0.6em;}
+.vipbg img{width: 0.8em; }
+.find_item{ background: #fff; padding: 0.5em 1em; border-bottom: 1px solid #e1e1e1; color: #323232; margin-bottom: 0.4em;}
+.find_leftImg{ margin-right: 1em; }
+.find_leftImg img{width: 1.5em; }
+.find_rightImg img{ width: 0.5em;}

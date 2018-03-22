@@ -1,0 +1,33 @@
+.coupon_list{ padding-top: 0.6em;}
+.coupon_item01{ background: #fff; margin:0 0.6em  0.6em  0.6em;}
+.item01_left{ background: url(../../common/images/coupon01.png) no-repeat; background-size: cover;}
+.item01_left{ width: 8.5em;  color: #fff; overflow: hidden;}
+.font125{ font-size: 1.5em;}
+.font08{ font-size: 0.8em;}
+.item01_top{ border-bottom: 1px solid #E1E1E1; }
+.coupon_sign01{ background: #ff8e49; color: #fff; padding: 2px 3px; border-radius: 5px; font-size: 0.9em; margin-right: 5px;}
+.right_top{ padding: 0.4em 0.5em 8px 0;  margin-left: 0.5em;}
+.use_btn{ border: 1px solid #ff8e49; color: #ff8e49;  padding:5px 15px ; border-radius: 2em; margin-right: 0.5em; margin-top: 5px; margin-bottom: 0.4em;}
+.check_img img{ width: 1em;}
+.coupon_botom{ margin-right: 0.5em; padding: 0.4em; border-top: 1px dashed #E1E1E1;  margin-left: 0.5em; }
+.right_center{  margin-left: 0.5em;}
+.coup_detail{ padding: 0.4em 0.6em;}
+.coupon_item02{ background: #fff; margin:0 0.6em  0.6em  0.6em;}
+.item02_left{ background: url(../../common/images/coupon02.png) no-repeat; background-size: cover;}
+.item02_left{ width: 8.5em;  color: #fff; overflow: hidden;}
+.coupon_sign02{ background: #9ed8f6; color: #fff; padding: 2px 3px; border-radius: 5px; font-size: 0.9em; margin-right: 5px;}
+.use_btn02{ border: 1px solid #9ed8f6; color: #9ed8f6;  padding:5px 15px ; border-radius: 2em; margin-right: 0.5em; margin-top: 5px; margin-bottom: 0.4em;}
+.use_btn03{ border: 1px solid #a8a8a8; color: #a8a8a8;  padding:5px 15px ; border-radius: 2em; margin-right: 0.5em; margin-top: 5px; margin-bottom: 0.4em;}
+.coupon_item03{ background: #fff; margin:0 0.6em  0.6em  0.6em;}
+.item03_left{ background: url(../../common/images/coupon03.png) no-repeat; background-size: cover;}
+.item03_left{ width: 8.5em;  color: #fff; overflow: hidden;}
+.coupon_sign03{ background: #c2c2c2; color: #fff; padding: 2px 3px; border-radius: 5px; font-size: 0.9em; margin-right: 5px;}
+.right_center02{ margin-top: 1.5em; margin-bottom: 1.5em;}
+.coupon_botom02{ padding-bottom: 1.3em;}
+.used_img{ position: absolute; top: -1.3em; right: 0.5em; width: 5em;}
+.allcheck{ width: 1em; height: 1em; border-radius: 50%;  border: 1px solid #9d9d9d;}
+.gouse{  margin-top: 5px; margin-bottom: 0.4em;}
+.mall_img img{ width: 1.5em;}
+.check_ok{ width: 1em; height: 1em; border: 1px solid #a4046b; border-radius: 50%; }
+.btn_box{ padding: 2em 1em;}
+.sure_use{ background: #a4046b; border-radius: 8px; color: #fff; height: 2.8em;}

@@ -1,0 +1,14 @@
+.shopcar_top{ height: 3.5em; background: #f0f0f0; padding: 0 0.6em;}
+.allcheck{ width: 1em; height: 1em; border-radius: 50%;  border: 1px solid #9d9d9d;}
+.mall_img img{ width: 1.5em;}
+.check_ok{ width: 1em; height: 1em; border: 1px solid #a4046b; border-radius: 50%;}
+.shopcar_list{ background: #fff; padding: 0.6em; margin-bottom: 0.6em;}
+.shopcar_img{ width: 2.5em; height: 2.5em; border: 1px solid #9d9d9d; border-radius: 0.5em;}
+.shopcar_img img{ width: 100%; border-radius: 0.5em;}
+.shopitem_right{ margin-left: 1em;} 
+.shop_cotrl{ border: 1px solid #9d9d9d; border-radius: 5px; height: 1.5em; }
+.cotrlL{ width: 1.5em;}
+.cotrlNum{  border-right: 1px solid #9d9d9d ;  border-left: 1px solid #9d9d9d ; width: 2.2em;}
+.cotrlR{ width: 1.5em;}
+.shopcar_botm{ margin-top: 0.5em;}
+.shopcar_item{ margin-bottom: 1em;}

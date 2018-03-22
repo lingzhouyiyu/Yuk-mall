@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../login/css/login.css">
+	</head>
+
+	<body class="um-vp login_bg" ontouchstart>
+	
+		<div class="ub ub-ac ub-pc ub-ver loginLogo" id="login">
+			<div class="ub ub-ac ub-pc ">
+				<img class=" ub ub-pc ub-img" src="css/myImg/logo.png" /></div>
+			
+		</div>
+		<!--描述：登录输入框
+           -->
+		<div class="ub ub-ac input_name uinput">
+			<input id="Fphone" type="text" class="ub ub-f1" placeholder="请输入手机号" />
+		</div>
+		<div class="ub ub-ac input_name input_pwd">
+			<div class="ub ub-f1 uinput">
+				<input id="Fpwd" type="password" class="ub ub-f1" placeholder="请输入登录密码" />
+			</div>
+			<div class="ub">
+				<img src="css/myImg/eye.png" />
+			</div>
+		</div>
+
+		<!--描述：登录按钮-->
+		<div class="ub ub-ver" id="login">
+
+			<div class="ub ub-ac ub-pc loginBtn">
+				<div class="ub ub-f1 ub-ac ub-pc loginBtn_1">登录</div>
+			</div>
+			<div class="ub ub-pj">
+				<div class="ub add goqy">企业登录 </div>
+			<div class="ub ub-ac ub-pc login_fpd "><span class="fpd findpwd">忘记密码</span></div>
+			</div>
+		</div>
+		<!--
+        	作者：694250639@qq.com
+        	时间：2016-10-31
+        	描述：注册
+        -->
+		<div class="ub ub-pc" id="login">
+			<div class="ub ub-ac rg"><span>还没有账号？现在去</span><span class="loginMfzz">免费注册</span></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../common/js/jquery-2.1.4.min.js"></script>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script src="../common/js/appcan.tab.js"></script>
+	<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	<script type="text/javascript" src="../common/js/jquery.md5.js"></script>
+	<script type="text/javascript" src="../common/js/Safe.js" ></script>
+	<script type="text/javascript" src="../common/js/des.js" ></script>
+	<script type="text/javascript">
+		//登录
+		appcan.button(".loginBtn", "ani-act", function(a, b) {
+			var furl = "http://dzyryd2.shop0301.com"+"/app/safelogin";
+			var Fphone = $("#Fphone").val();
+			var Fpwd = $("#Fpwd").val();
+			if(Fphone == "") {
+				appcan.window.openToast('登录手机号不能为空！', '1000');
+				return;
+			}
+			if(Fpwd == "") {
+				appcan.window.openToast('登录密码不能为空！', '1000');
+				return;
+			}
+			var parm = {
+				phone: $("#Fphone").val(),
+				pwd: $.md5($("#Fpwd").val()).toUpperCase(),
+			};
+			//Fsuper.getresult(furl, parm, login);
+			Safe.apppost(furl, parm, function(result) {
+				var code = result.code;
+				var msg = result.msg;
+				var data = result.data;
+				login(data,code);
+			})
+		})
+
+		function login(row, code) {
+			if(code == 1) {
+				var data = row[0];
+				console.log(data);
+				appcan.locStorage.setVal("userinfo", data);
+				appcan.window.open("index", "../index/index.html");
+
+			} else {
+				appcan.window.openToast('用户名或密码不正确！', '1000');
+			}
+
+		}
+		//忘记密码
+		//		appcan.button(".loginBtn", "ani-act", function(a, b) {
+		//
+		//			appcan.window.open("index", "../index/index.html");
+		//			appcan.window.publish('index', '');
+		//			//              appcan.window.publish('move', '1');
+		//		})
+
+		//去注册
+		appcan.button(".loginMfzz", "ani-act", function(a, b) {
+			appcan.window.open("gRegister", "../register/gRegister.html");
+		})
+		
+		//企业登录
+        appcan.button(".goqy", "ani-act", function(a, b) {
+            appcan.window.open("qylogin", "../qylogin/qylogin.html");
+        })
+        //忘记密码
+        appcan.button(".findpwd", "ani-act", function(a, b) {
+            appcan.window.open("findpwd", "../findpwd/findpwd.html");
+        })
+	</script>
+
+</html>

@@ -1,0 +1,20 @@
+.sure_top{ background: #fff; padding: 1em 0.6em; margin-bottom: 0.6em;}
+.top_left{ margin-right: 1em;}
+.sure_right{ margin-left: 1em;}
+.sure_center{ background: #fff; padding: 0.8em; border-bottom: 1px solid #E1E1E1;}
+.record_list{ background: #fff; margin-bottom: 0.6em;}
+.record_item{ padding: 0.6em 0.6em 0 0.6em;}
+.record_left{ margin-right: 1em;}
+.record_left img{ width: 4em; height: 4em;}
+.record_sign img{ width: 1em;}
+.record_txt{ font-size: 0.85em;}
+.record_right{ border-bottom: 1px solid #E1E1E1; padding-bottom: 0.6em;}
+.yzbl_list{ background: #fff; padding:0 0.6em; margin-bottom: 0.6em;}
+.yzbl_item{  border-bottom: 1px solid #E1E1E1; padding: 0.6em 0;}
+.yzbl_left{width: 75%; }
+.yzbl_center{ padding-left: 0.5em; padding-right: 0.5em; width: 15%;}
+.yzbl_right{ width: ; }
+.coupon{ background: #fff; padding: 1em 0.6em; margin-bottom: 0.6em;}
+.coup_sign{background: #f23030; color: #fff;  padding: 4px 5px; font-size: 0.8em; margin-left: 10px;}
+.sp_price{ background: #fff; padding: 0 0.6em;}
+.spprice_item{ padding: 0.6em 0;}

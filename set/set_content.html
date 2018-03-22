@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/set.css">
+	</head>
+
+	<body class="um-vp  bc-bg" ontouchstart>
+		<!--使用帮助 ——客服电话-->
+		<div class="ub ub-ver set_1">
+			<div class="ub ub-f1 ub-ac ub-pj sybz">
+				<div class="ub L">意见反馈</div>
+				<div class="ub R account_right">
+					<img src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac ub-pj yjfk">
+				<div class="ub L">用户协议</div>
+				<div class="ub R account_right">
+					<img src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac ub-pj gywm">
+				<div class="ub L">关于我们</div>
+				<div class="ub R account_right">
+					<img src="../common/images/icon_grayR.png" />
+				</div>
+			</div>
+		</div>
+		<!--退出账号-->
+		<div class="set_3 loginexit">
+			<div class="ub ub-f1 ub-ac ub-pc tczhBtn">退出账号</div>
+		</div>
+	</body>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script>
+		appcan.ready(function() {});
+		appcan.button(".loginexit", "ani-act", function(a, b) {
+			appcan.locStorage.remove("userinfo");
+			appcan.window.open("login", "../login/login.html");
+			appcan.window.evaluateScript({
+				name: 'set',
+				scriptContent: 'windowclose()'
+			});
+
+		})
+
+		//打开使用帮助
+		appcan.button(".sybz", "ani-act", function(a, b) {
+
+				appcan.window.open("feedback", "../feedback/feedback.html");
+			})
+			//打开意见反馈
+		appcan.button(".yjfk", "ani-act", function(a, b) {
+
+				appcan.window.open("xieyi", "../xieyi/xieyi.html");
+				//              appcan.window.publish('move', '1');
+			})
+			//打开意见反馈
+		appcan.button(".gywm", "ani-act", function(a, b) {
+
+			appcan.window.open("aboutUs", "../aboutUs/aboutUs.html");
+			//              appcan.window.publish('move', '1');
+		})
+	</script>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+		<style>
+			.sc-text-tab {
+				color: #323232 !important;
+			}
+			
+			.sc-text-active {
+				color: #a4046b !important;
+			}
+		</style>
+	</head>
+
+	<body class="um-vp " ontouchstart>
+		<div id="page_0" class="up ub ub-ver" tabindex="0">
+			<div class="ub ub-pc ub-ac ico_padding">
+
+			</div>
+			<!--</div>-->
+			<!--header开始-->
+
+			<div id="head" class="uh bc-text-head ub " style="background: #fff; padding-bottom: 0.5em; padding-top: 1em; padding-bottom: 0.6em; border-bottom: 1px solid #E1E1E1;">
+				<div style=" margin-left: 0.5em" id="nav-left">
+					<div class="fa fa-angle-left fa-2x" style="color: #382071;"></div>
+				</div>
+				<div class="ub ub-f1  ub-ac ub-pc head_border" style="margin-left: 0.8em; margin-right: 0.5em;">
+					<div id="scddtop" class="ub ub-f1 ub-fh dbhead ub-ac ub-pc   scddtop" style="height: 2em; border-bottom-left-radius: 0.4em; border-top-left-radius: 0.4em;">
+						商城订单
+					</div>
+					<div id="xfddtop" class="ub ub-ac ub-pc ub-f1 ub-fh dbhead xfddtop" style="height: 2em; ">
+						消费订单
+					</div>
+					<div id="lygtop" class="ub ub-ac ub-pc ub-f1 ub-fh dbhead lygtop head_active" style="height: 2em; border-top-right-radius: 0.4em; border-bottom-right-radius: 0.4em;">
+						0元购订单
+					</div>
+				</div>
+
+			</div>
+			<!--header结束-->
+			<div id="header" class="bg ulev1 ub-ac ub-pc" style="background: #fff"></div>
+			<!--header结束-->
+			<!--content开始-->
+			<div id="content" class="ub-f1 tx-l t-bla c-wh">
+
+			</div>
+			<!--content结束-->
+			<div id="footer" class="uf t-bla ub sc-bg-active  sc-border-tab ">
+				<div class="ub ub-f1 tab" id="footer1">
+
+				</div>
+
+			</div>
+			<div id="footer" class="uf bc-text-head ub ubt bc-border">
+
+			</div>
+		</div>
+
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script src="../../common/js/appcan.tab.js"></script>
+	</body>
+	<script>
+		var tabview = appcan.tab({
+			selector: "#header",
+			hasIcon: false,
+			hasAnim: true,
+			hasLabel: true,
+			hasBadge: false,
+			data: [{
+				label: "全部",
+			}, {
+				label: "待发货",
+			}, {
+				label: "待收货",
+			}]
+		});
+		tabview.on("click", function(obj, index) { /*TAB变更时切换多浮动窗口*/
+
+			//appcan.window.publish('mybill0', '');
+			//appcan.window.publish('mybill1', '');
+			//appcan.window.publish('mybill2', '');
+			appcan.window.selectMultiPopover("content", index);
+		})
+		appcan.ready(function() {
+			appcan.window.subscribe('lygtop',
+				function(msg) {
+					$("#lygtop").addClass("head_active");
+					windowclose();
+				});
+			appcan.window.subscribe('billmove', function(index) {
+				appcan.window.selectMultiPopover("content", index);
+				tabview.moveTo(index);
+			});
+			billindex = appcan.locStorage.getVal("billindex");
+			tabview.moveTo(billindex);
+			var top = $('#head').offset().height + $('#header').offset().height;
+			appcan.frame.open({ /*创建多浮动窗口*/
+				id: "content",
+				url: [{
+					"inPageName": "lygordersorders_content",
+					"inUrl": "lygorders_content.html",
+				}, {
+					"inPageName": "lygordersorders_dfh",
+					"inUrl": "lygorders_dfh.html",
+				}, {
+					"inPageName": "lygordersorders_dsh",
+					"inUrl": "lygorders_dsh.html",
+				}],
+				top: top,
+				left: 0,
+				index: billindex,
+				change: function(index, res) { /*浮动窗口推拽变更时回调，可控制tab进行同步变更*/
+
+					tabview.moveTo(res.multiPopSelectedIndex);
+				}
+			});
+			window.onorientationchange = window.onresize = function() {
+				appcan.frame.resize("content", 0, top);
+			}
+			appcan.window.subscribe('move', function(msg) {
+				appcan.window.selectMultiPopover("content", msg);
+				tabview.moveTo(msg);
+			});
+		});
+		appcan.button("#nav-left", "btn-act", function() {
+
+			appcan.window.close(-1);
+		})
+
+		//头部点击切换
+		appcan.button(".dbhead", "btn-act", function() {
+			$(".dbhead").removeClass("head_active");
+			$(this).addClass("head_active");
+			var selectid = $(this).attr("id");
+			if(selectid == "scddtop") { //商城订单
+				appcan.window.publish('xfddtop', '');
+				appcan.window.publish('lygtop', '');
+				appcan.window.open("orders", "../../orders/orders.html");
+				appcan.window.open({
+                    name: "orders",
+                    dataType: 0,
+                    aniId: 0,
+                    data: "../../orders/orders.html"
+                });
+			}
+			if(selectid == "xfddtop") { //消费订单
+				appcan.window.publish('scddtop', '');
+				appcan.window.publish('lygtop', '');
+				appcan.window.open({
+                    name: "xforders",
+                    dataType: 0,
+                    aniId: 0,
+                    data: "../../orders/xforders/xforders.html"
+                });
+			}
+			if(selectid == "lygtop") { //零元购订单
+				appcan.window.publish('xfddtop', '');
+				appcan.window.publish('scddtop', '');
+				appcan.window.open({
+                    name: "lygorders",
+                    dataType: 0,
+                    aniId: 0,
+                    data: "../../orders/lygorders/lygorders.html"
+                });
+			}
+			appcan.window.publish('Fseltybtn', $(this).attr("id"));
+		})
+
+		//打开确认订单
+		appcan.button(".gosure", "ani-act", function(a, b) {
+
+			appcan.window.open("sureOrder", "../sureOrder/sureOrder.html");
+			//              appcan.window.publish('move', '1');
+		})
+
+		function windowclose() {
+			appcan.window.close(-1);
+		}
+	</script>
+
+</html>

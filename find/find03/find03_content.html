@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bg_white" ontouchstart>
+		<img src="../css/myImg/find03.jpg" style="width:auto;width:90%;text-align:center;vertical-align:middle;padding: 1em;">
+		<div class="ub ub-ver ub--ac ub-pc a_1">
+
+			<div class="ub ub-pc ub-ac word">
+				<div class="ub ub-f1 ub-pc ub-ac sfyz">账号验证</div>
+				<div class="ub ub-f1 ub-pc ub-ac szjymm">身份验证</div>
+				<div class="ub ub-f1 ub-pc ub-ac bdyhk">重置密码</div>
+			</div>
+		</div>
+		<div class="ub ub-ver bc-text main_box">
+			<div class="ub  ub-ac ub-f1 input_item">
+				<div class="ub ub-f1 pwd_input uinput">
+					<input class="ub ub-f1  newFpwd" type="password" placeholder="请输入新交易密码" />
+				</div>
+			</div>
+			<div class="ub  ub-ac ub-f1 input_item uinput">
+				<input class="ub ub-f1 Fpaypwd" type="password" placeholder="重复交易密码" />
+			</div>
+		</div>
+		<div class="ub btn_box" >
+			<div class="ub ub-ac ub-pc ub-f1 go_btn" onclick="updatepwd()">
+				确认
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../common/js/jquery-2.1.4.min.js"></script>
+	<script src="../../common/js/appcan.js"></script>
+	<script src="../../common/js/appcan.control.js"></script>
+	<script src="../../common/js/appcan.tab.js"></script>
+	<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+	<script type="text/javascript" src="../../common/js/jquery.md5.js"></script>
+	<script type="text/javascript" src="../../common/js/Safe.js"></script>
+	<script type="text/javascript" src="../../common/js/des.js"></script>
+	<script>
+		function updatepwd() {
+			var newFpwd = $(".newFpwd").val();
+			if(newFpwd == "") {
+				appcan.window.openToast('新交易密码不能为空！', '1000', 5);
+				return;
+			}
+			var Fpaypwd = $(".Fpaypwd").val();
+			if(Fpaypwd == "") {
+				appcan.window.openToast('重复交易密码不能为空！', '1000', 5);
+				return;
+			}
+			if(newFpwd != Fpaypwd){
+				appcan.window.openToast('两次交易密码不相同！', '1000', 5);
+				return;
+			}
+			appcan.ajax({
+				url: "http://dzyryd2.shop0301.com" + "/app/updatepwd",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					Fpaypwd: $.md5($(".Fpaypwd").val().trim()).toUpperCase(),
+					Fuserid: Fsuper.getuserid()
+				},
+				success: function(result) {
+					if(result.code == 0) {
+						appcan.window.evaluateScript({
+
+							name: 'find',
+							scriptContent: 'windowclose()'
+						});
+						appcan.window.evaluateScript({
+
+							name: 'find02',
+							scriptContent: 'windowclose()'
+						});
+						appcan.window.evaluateScript({
+
+							name: 'find03',
+							scriptContent: 'windowclose()'
+						});
+
+					}
+				},
+				error: function(e) {
+					appcan.window.openToast('服务器出错!', '1000', 5);
+				}
+			});
+		}
+	</script>
+
+</html>

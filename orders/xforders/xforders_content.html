@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ver xforeders_list list">
+			<!--消费订单外部大item-->
+
+		</div>
+		<div class="temp uhide">
+			<div class="ub ub-f1 bc-text ub-ver xfbig_item items">
+				<div class="ub ub-f1  xforders_top">
+					<div class="ub ub-f1">
+						<span>订单号</span>
+						<span class="ForderNum"></span>
+					</div>
+					<div class="ub lscolor">
+						交易成功
+					</div>
+				</div>
+				<div class="ub ub-ac shop_infor">
+					<div class="ub shopinfor_left umar-r">
+						<img class="Fimg" src="" />
+					</div>
+					<div class="ub shopinfor_right FsjMc">
+
+					</div>
+				</div>
+				<div class="ub common_item">
+					<div class="ub ub-f1">
+						消费金额
+					</div>
+					<div class="ub ub-pe">
+						<span>￥</span>
+						<span class="FxfJe"></span>
+					</div>
+				</div>
+				<div class="ub common_item">
+					<div class="ub ub-f1">
+						优惠券
+					</div>
+					<div class="ub ub-pe">
+						<span>-</span>
+						<span>￥</span>
+						<span>0.00</span>
+					</div>
+				</div>
+				<div class="ub common_item">
+					<div class="ub ub-f1">
+						折扣优惠
+					</div>
+					<div class="ub ub-pe">
+						<span>-</span>
+						<span>￥</span>
+						<span class="FzkouYh">0.00</span>
+					</div>
+				</div>
+				<div class="ub common_item02">
+					<div class="ub ub-f1 color96 FpayMfethod">
+
+					</div>
+					<div class="ub ub-pe">
+						<span>实付</span>
+						<span class="lscolor">￥</span>
+						<span class="lscolor Fmoney">0.00</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../common/js/jquery.1.10.2.js"></script>
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+
+	</body>
+	<script>
+		var Fstart = 0;
+		var pageSize = 10;
+		appcan.ready(function() {
+			getShopOrderList();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					Fstart = 0;
+					$(".list").empty();
+					getShopOrderList();
+				} else if(type == 1) {
+					getShopOrderList();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+		//打开客服电话
+		appcan.button(".lxkf", "ani-act", function(a, b) {
+
+				$(".kefu").removeClass("uhide");
+			})
+			//关闭客服电话
+		appcan.button(".outkf", "ani-act", function(a, b) {
+
+				$(".kefu").addClass("uhide");
+			})
+			//打开关注微信
+		appcan.button(".gzwx", "ani-act", function(a, b) {
+
+				appcan.window.open("weixin", "../weixin/weixin.html");
+				appcan.window.publish('weixin', '');
+				//              appcan.window.publish('move', '1');
+			})
+			//打开常见问题
+		appcan.button(".cjwt", "ani-act", function(a, b) {
+
+			appcan.window.open("questions", "../questions/questions.html");
+			appcan.window.publish('questions', '');
+			//              appcan.window.publish('move', '1');
+		})
+
+		function getShopOrderList() {
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				pageSize: pageSize,
+				Fstart: Fstart,
+			};
+			Fsuper.getrows('/ygylapp/getShopOrderList', parm, addorder, function() {});
+		}
+
+		function addorder(row, end) {
+			var strs = new Array();
+			strs = row.Fimg.split(",");
+			var list = $(".list");
+			var item = $(".temp").clone();
+			var domitem = item.find(".items");
+			domitem.attr("id", row.Fxforderid);
+			domitem.find(".Fimg").attr("src", Serverurl + "/" +strs[0]);
+			domitem.find(".ForderNum").text(row.ForderNum);
+			domitem.find(".Fmoney").text(row.Fzfje);
+			domitem.find(".FsjMc").text(row.FsjMc);
+			domitem.find(".FxfJe").text(row.FxfJe);
+			domitem.find(".FzkouYh").text(row.FzkouYh);
+			//getGoodsAttrbuteChildById(list, domitem, row.childs);
+			//domitem.find(".cancelorder").attr("onclick", "cancelorder(" + row.Forderid + ",this)");
+			//domitem.find(".gotopay").attr("onclick", "gotopay(" + row.Forderid + ",this)");
+			list.append(domitem);
+			Fstart = end;
+		}
+	</script>
+
+</html>

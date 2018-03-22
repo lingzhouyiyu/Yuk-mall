@@ -1,0 +1,11 @@
+.allcheck{ width: 1em; height: 1em; border-radius: 50%;  border: 1px solid #9d9d9d;}
+.mall_img img{ width: 1.5em;}
+.check_ok{ width: 1em; height: 1em; border: 1px solid #a4046b; border-radius: 50%;}
+.address{padding: 1em;background: #FFFFFF;border-top: 1px solid #F0F0F0;}
+.name{margin: 0.5em 0;margin-right: 2em;}
+.dz{color: #737373;padding:0.5em 0;border-bottom: 1px solid #F0F0F0;}
+.hs{margin-left: 0.5em;color: #737373;}
+img{width: 1.6em;margin-right: 0.5em;}
+.choose{padding-top: 0.5em;}
+.border{height: 6px;background: #F0F0F0;}
+.no{color: #F0F0F0;}

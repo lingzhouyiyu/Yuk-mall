@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<!--消费列表-->
+		<div class="ub ub-ver spend_list">
+
+		</div>
+		<div class="myxftemp uhide">
+			<div class="ub ub-ver spend_item xfitems">
+				<div class="ub spaend_top ub-f1 umar-b ">
+					<div class="ub ub-f1 bc-text txthide Fname">
+
+					</div>
+					<div class="ub color96 font_size08 Fdatetime">
+
+					</div>
+				</div>
+				<div class="ub spend_botom">
+					<div class="ub ub-f1 font09 color96">
+						<span class="Ftype"></span><span class="FMingC"></span>
+					</div>
+					<div class="ub ub-ac lscolor">
+						<span>-</span>
+						<span class="Fje">0.00</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--消费弹出层-->
+		<div class="mask uhide">
+			<div class="ub ub-ver mask_main">
+				<div class=" ub mask_item">
+					<div href="2" class="ub ub-f1 item_left lscolor lxqz">
+						利息前置消费
+					</div>
+					<div class="ub item_right ">
+						<img src="../common/images/dadou.png" />
+					</div>
+				</div>
+				<div class=" ub mask_item">
+					<div class="ub ub-f1 item_left ">
+						会员卡余额消费
+					</div>
+					<div class="ub item_right uhide">
+						<img src="../common/images/dadou.png" />
+					</div>
+				</div>
+				<div class=" ub mask_item">
+					<div href="1" class="ub ub-f1 item_left">
+						0元购
+					</div>
+					<div class="ub item_right uhide">
+						<img src="../common/images/dadou.png" />
+					</div>
+				</div>
+				<div class=" ub mask_item">
+					<div class="ub ub-f1 item_left">
+						第三方支付
+					</div>
+					<div class="ub item_right uhide">
+						<img src="../common/images/dadou.png" />
+					</div>
+				</div>
+				<div class=" ub mask_item">
+					<div href="0" class="ub ub-f1 item_left">
+						授信消费
+					</div>
+					<div class="ub item_right uhide">
+						<img src="../common/images/dadou.png" />
+					</div>
+				</div>
+				<div class=" ub mask_item">
+					<div class="ub ub-f1 item_left">
+						充值记录
+					</div>
+					<div class="ub item_right uhide ">
+						<img src="../common/images/dadou.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="../common/js/appcan.js"></script>
+	<script src="../common/js/appcan.control.js"></script>
+	<script type="text/javascript" src="../common/js/yfkj.js"></script>
+	<script>
+		var Fzero = "2";
+		var Fstart = 0;
+		var pageSize = 10;
+		appcan.ready(function() {
+			getMxfData();
+			appcan.window.subscribe('changeid', function(msg) {
+				$(".mask").removeClass("uhide");
+			});
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					Fstart = 0;
+					$(".spend_list").empty();
+					getMxfData();
+				} else if(type == 1) {
+					getMxfData();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+
+		});
+		//打开客服电话
+		appcan.button(".mask_item", "ani-act", function(a, b) {
+				Fzero = $(this).find(".item_left").attr("href");
+				$(".item_right").addClass("uhide");
+				$(".item_left").removeClass("lscolor");
+				$(this).find(".item_right").removeClass("uhide");
+				$(this).find(".item_left").addClass("lscolor");
+				$(".mask").addClass("uhide");
+				Fstart = 0;
+				$(".spend_list").empty();
+				getMxfData();
+				appcan.window.publish('overchange', $(this).text().trim());
+			})
+			//消费查询
+		function getMxfData() {
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				Fzero: Fzero,
+				pageSize: pageSize,
+				Fstart: Fstart,
+			};
+			Fsuper.getrows('/ygylapp/getMxfData', parm, addorder, function() {});
+		}
+
+		function addorder(row, end) {
+			var list = $(".spend_list");
+			var item = $(".myxftemp").clone();
+			var domitem = item.find(".xfitems");
+			domitem.attr("id", row.Forderid);
+			domitem.find(".Fje").text(row.Fje);
+			domitem.find(".Fname").text(row.Fname);
+			domitem.find(".Fdatetime").text(row.Fdatetime);
+			domitem.find(".FMingC").text(row.FMingC);
+			if(row.FType == "0") {
+				domitem.find(".Ftype").text("【新手标】");
+			}
+			if(row.FType == "1") {
+				domitem.find(".Ftype").text("【随投随赎】");
+			}
+			if(row.FType == "2") {
+				domitem.find(".Ftype").text("【随投定赎】");
+			}
+			if(row.FType == "3") {
+				domitem.find(".Ftype").text("【0元购】");
+			}
+			if(row.FType == "4") {
+				domitem.find(".Ftype").text("【薪计划】");
+			}
+			//domitem.find(".cancelorder").attr("onclick", "cancelorder(" + row.Forderid + ",this)");
+			//domitem.find(".gotopay").attr("onclick", "gotopay(" + row.Forderid + ",this)");
+			list.append(domitem);
+			Fstart = end;
+		}
+	</script>
+
+</html>

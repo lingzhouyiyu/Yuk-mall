@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../../common/css/ui-box.css">
+		<link rel="stylesheet" href="../../common/css/ui-base.css">
+		<link rel="stylesheet" href="../../common/css/ui-color.css">
+		<link rel="stylesheet" href="../../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="prove_top">
+			<img src="../css/myImg/prove03.jpg">
+		</div>
+		<div class="ub ub-ver ub--ac ub-pc a_1">
+			<div class="ub ub-pc ub-ac word">
+				<div class="ub ub-f1 ub-pc ub-ac sfyz">身份证验证</div>
+				<div class="ub ub-f1 ub-pc ub-ac szjymm">设置交易密码</div>
+				<div class="ub ub-f1 ub-pc ub-ac bdyhk">绑定银行卡</div>
+			</div>
+		</div>
+		<div class="ub ub-ver prove_success">
+			<div class="ub ub-ac ub-pc prove_img">
+				<img src="../css/myImg/prove04.png" />
+			</div>
+			<div class="ub ub-ac ub-pc prove_txt">
+				身份验证成功
+			</div>
+			<div class="ub ub-ac ub-pc">
+				<div class="ub ub-ac ub-pc prove_btn prove_btn04 gocz">
+					返回充值
+				</div>
+				<div class="ub ub-ac ub-pc prove_btn gohome">
+					返回首页
+				</div>
+			</div>
+		</div>
+		<script src="../../common/js/appcan.js"></script>
+		<script src="../../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../../common/js/jquery.1.10.2.js"></script>
+	</body>
+	<script>
+		//打开回首页
+		appcan.button(".gohome", "ani-act", function(a, b){
+
+		appcan.window.open("index", "../../index/index.html");
+
+		})
+	</script>
+
+</html>

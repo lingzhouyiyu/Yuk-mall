@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css" />
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="../common/css/ui-box.css">
+		<link rel="stylesheet" href="../common/css/ui-base.css">
+		<link rel="stylesheet" href="../common/css/ui-color.css">
+		<link rel="stylesheet" href="../common/css/appcan.icon.css">
+		<link rel="stylesheet" href="../common/css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub detail_top bc-text">
+			<div class="ub  ub-ac ub-pc ub-f1 ub-fh top_nav lscolor " id="imgDetail">
+				图文详情
+			</div>
+			<div class="ub  ub-ac ub-pc ub-f1 ub-fh top_nav" id="txtDetail">
+				规格参数
+			</div>
+		</div>
+		<!--图文详情-->
+		<div class="imgDetail mainbox FNrhtml" id="imgDetailid">
+
+		</div>
+		<!--规格参数-->
+		<div class="ggcs sc-text mainbox Fdes" id="txtDetailid">
+		</div>
+		<script src="../common/js/appcan.js"></script>
+		<script src="../common/js/appcan.control.js"></script>
+		<script type="text/javascript" src="../common/js/yfkj.js"></script>
+		<script type="text/javascript" src="../common/js/jquery.1.10.2.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			appcan.window.subscribe('Fdes', function(msg) {
+				$(".Fdes").text(msg);
+			});
+			appcan.window.subscribe('FNrhtml', function(msg) {
+				$(".FNrhtml").html(msg);
+			});
+		});
+		appcan.button(".top_nav", "btn-act", function() {
+			$(".top_nav").removeClass("lscolor");
+			$(".mainbox").addClass("uhide");
+			$(this).addClass("lscolor");
+			var id = $(this).attr("id");
+			id = id + "id";
+			$("#" + id).removeClass("uhide");
+		})
+	</script>
+
+</html>

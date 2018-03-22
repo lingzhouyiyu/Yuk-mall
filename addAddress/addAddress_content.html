@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+        <link rel="stylesheet" href="../common/css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../common/css/ui-box.css">
+        <link rel="stylesheet" href="../common/css/ui-base.css">
+        <link rel="stylesheet" href="../common/css/ui-color.css">
+        <link rel="stylesheet" href="../common/css/appcan.icon.css">
+        <link rel="stylesheet" href="../common/css/appcan.control.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script type="text/javascript" src="../common/js/jquery-2.1.4.min.js"></script>
+    </head>
+
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="ub  ub-ver bc-text bg">
+            <div class="ub ub-ac pd uinput">
+                <span>收货人：</span>
+                <input class="ub ub-f1  Fnamedata" type="text" />
+            </div>
+            <div class="ub ub-ac pd uinput">
+                <span>联系方式：</span>
+                <input class="ub ub-f1 uinput Fphonedata" type="text" />
+            </div>
+        </div>
+        <div class="ub choose" id="expressArea">
+            <dl class="ub">
+                <dt class="ub">
+                    选择地区：
+                </dt>
+                <!--选择地区填入值-->
+                <dd class="ub ub-f1 ssq">
+                    省 > 市 > 区/县
+                </dd>
+            </dl>
+        </div>
+
+        <!--选择地区弹层-->
+        <section id="areaLayer" class="express-area-box">
+            <header>
+                <h3>选择地区</h3>
+                <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+                <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+            </header>
+            <article id="areaBox">
+                <ul id="areaList" class="area-list"></ul>
+            </article>
+        </section>
+        <!--遮罩层-->
+        <div id="areaMask" class="mask"></div>
+        <script src="../common/js/area.js"></script>
+        <div class="ub ub-ac uinput xxdz uinput">
+            <span>详细地址：</span>
+            <input class="ub ub-f1  Faddress" type="text" placeholder="街道、楼盘等" />
+        </div>
+
+        <div class="ub ub-ac ub-pc bc" onclick="saveaddress()">
+            <div class="ub ub-ac ub-pc bc_btn " >
+                保存
+            </div>
+        </div>
+        <script src="../common/js/appcan.js"></script>
+        <script src="../common/js/appcan.control.js"></script>
+        <script type="text/javascript" src="../common/js/yfkj.js"></script>
+    </body>
+    <script>
+    var editid=appcan.locStorage.getVal("editid");
+    var savetag=appcan.locStorage.getVal("savetag");
+
+        function saveaddress() {
+            var address = $(".ssq").text();
+            var array = new Array();
+            array = address.split(">");
+            var Fprovince = array[0];
+            var Fcity = array[1];
+            var Fregion = array[2];
+            var Fname = $(".Fnamedata").val();
+            var Fphone = $(".Fphonedata").val();
+            var Faddress = $(".Faddress").val();
+            var parm = {                
+                Fid:editid,
+                //地址id
+                Fprovince : Fprovince,
+                //省份
+                Fcity : Fcity,
+                //城市
+                Fregion : Fregion,
+                //区域
+                Fname : Fname,
+                //联系人
+                Fphone : Fphone,
+                //联系电话
+                Faddress : Faddress,
+                //详细地址
+                Fuserid : Fsuper.getuserid(),
+                //用户id
+            }
+             if (savetag == 0) {
+                    delete parm.Fid;
+                }
+            appcan.ajax({
+                url: Serverurl + "/YgylApp/saveaddress",
+                //url : "http://ygyl.shop0301.com/YgylApp/getIndexSjdata",
+                type : "POST",
+                dataType : "json",
+                data:{
+                     p1: encodeURI(JSON.stringify(parm)),
+                      tag: savetag,
+                },
+                success : function(result) {
+                 
+                    var code = result.code;
+                    var msg = result.msg;
+
+                    var debug = result.debug;
+                    if (code < 10000) {
+                        if (code == 0) {//返回成功
+                           appcan.window.open("address", "../address/address.html");
+                        }
+                    } else {
+                        if (Fsuperdbg) {
+                            alert(result.code);
+                            alert(result.msg);
+                            alert(result.debug);
+                        }
+                    }
+                    
+                },
+                 error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                }
+            });          
+        }
+        //如果是修改，则将之前的数据查询出来
+        appcan.ready(function() {
+            if(savetag==1){
+                 getbeforeaddress();
+                
+            }              
+            })
+            
+            function getbeforeaddress(){
+                
+                appcan.ajax({
+                url: Serverurl + "/YgylApp/getbeforeaddress",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    Fid: editid,
+                },
+                success: function(result) {
+
+                    var rows = result.data.rows;
+                    var code = result.code;
+                    var msg = result.msg;
+                    var debug = result.debug;
+                    if(code < 10000) {
+                        if(code == 0) { //返回成功
+                          $(".Fnamedata").val(result.data[0].Fname);
+                          $(".Fphonedata").val(result.data[0].Fphone);
+                          $(".ssq").text(result.data[0].Fprovince+">"+result.data[0].Fcity+">"+result.data[0].Fregion);
+                          $(".Faddress").val(result.data[0].Faddress);
+                        }
+                    } else {
+                        if(Fsuperdbg) {
+                            alert(result.code);
+                            alert(result.msg);
+                            alert(result.debug);
+                        }
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                }
+            });
+            }
+    </script>
+
+</html>
